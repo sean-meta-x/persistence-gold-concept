@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Persistence Gold — Website Redesign Concept</title>
+<meta name="description" content="Persistence Gold Group (HKEX: 2489) — gold mining in Yantai, Shandong. Website redesign concept for internal review. 集海黄金集团官网改版概念稿。">
+<meta name="theme-color" content="#0e0c08">
+<meta property="og:title" content="Persistence Gold Group — Website Redesign Concept">
+<meta property="og:description" content="集海黄金集团 (02489.HK) 官网重设计概念稿 · Dark-luxury IR site concept">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230e0c08'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia,serif' font-size='36' font-style='italic' fill='%23c9a227'%3EP%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Manrope:wght@300;400;500;600;700&family=Spline+Sans+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -108,6 +114,8 @@
   }
   .nav-links a:hover, .nav-links a:focus-visible { color: var(--text); }
   .nav-links a:hover::after { width: 100%; }
+  .nav-links a.active { color: var(--gold-bright); }
+  .nav-links a.active::after { width: 100%; }
   .nav-cta {
     border: 1px solid var(--gold-dim); color: var(--gold-bright) !important;
     padding: 0.5rem 1.1rem; border-radius: 2px;
@@ -172,6 +180,11 @@
       radial-gradient(900px 500px at 10% 90%, rgba(201, 162, 39, 0.06), transparent 55%),
       linear-gradient(180deg, #0a0806 0%, var(--ink) 55%);
   }
+  #dust {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 1;
+  }
+  .hero > *:not(#dust) { position: relative; z-index: 2; }
   .hero::after {
     content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.35;
     background-image: repeating-radial-gradient(ellipse 140% 90% at 82% -10%,
@@ -399,9 +412,39 @@
     font-size: 0.72rem; color: var(--text-dim); font-family: var(--mono); letter-spacing: 0.04em;
   }
   @media (max-width: 900px) { .foot-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- back to top ---------- */
+  .to-top {
+    position: fixed; right: clamp(1rem, 3vw, 2rem); bottom: clamp(1rem, 3vw, 2rem); z-index: 40;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(14, 12, 8, 0.85); border: 1px solid var(--gold-dim);
+    color: var(--gold-bright); font-size: 1rem; cursor: pointer;
+    display: grid; place-items: center;
+    opacity: 0; transform: translateY(12px); pointer-events: none;
+    transition: opacity 0.35s var(--ease), transform 0.35s var(--ease), background 0.25s;
+  }
+  .to-top.show { opacity: 1; transform: none; pointer-events: auto; }
+  .to-top:hover { background: var(--gold); color: var(--ink); }
+
+  /* ---------- a11y ---------- */
+  .skip-link {
+    position: fixed; top: -100px; left: 1rem; z-index: 100;
+    background: var(--gold); color: var(--ink); font-weight: 700;
+    padding: 0.6rem 1rem; border-radius: 2px; text-decoration: none;
+    transition: top 0.2s;
+  }
+  .skip-link:focus { top: 0.5rem; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 3px; }
+
+  /* ---------- governance committees ---------- */
+  .gov-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+  .gov-chips .chip { color: var(--text-dim); }
+  .gov-chips .chip:hover { color: var(--gold-bright); }
 </style>
 </head>
 <body>
+
+<a class="skip-link" href="#about" data-i18n="a11y.skip">Skip to content</a>
 
 <div class="ticker" aria-label="Market data">
   <span class="tag">HKEX 2489</span>
@@ -438,6 +481,7 @@
 </div>
 
 <header class="hero" id="top">
+  <canvas id="dust" aria-hidden="true"></canvas>
   <p class="hero-kicker" data-i18n="hero.kicker">Shandong Gold Belt · Producing Since 2011</p>
   <h1 data-i18n="hero.title">Mining gold with <span class="gold">persistence</span>, discipline &amp; care.</h1>
   <p class="hero-sub" data-i18n="hero.sub">
@@ -657,6 +701,13 @@
         A dedicated board-level ESG Committee and Risk Management Committee, established 2025,
         oversee disclosure, ethics and sustainable-investment standards.
       </p>
+      <div class="gov-chips">
+        <span class="chip" data-i18n="gov.c1">Audit Committee</span>
+        <span class="chip" data-i18n="gov.c2">Remuneration Committee</span>
+        <span class="chip" data-i18n="gov.c3">Nomination Committee</span>
+        <span class="chip" data-i18n="gov.c4">ESG Committee</span>
+        <span class="chip" data-i18n="gov.c5">Risk Management Committee</span>
+      </div>
     </div>
   </div>
 </section>
@@ -742,6 +793,8 @@
     <span data-i18n="foot.note">DESIGN CONCEPT — NOT AN OFFICIAL COMPANY PUBLICATION</span>
   </div>
 </footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="Back to top">↑</button>
 
 <script>
   /* ================= i18n ================= */
@@ -858,7 +911,13 @@
     "foot.a3": ["Reserves &amp; Resources", "储量资源"],
     "foot.a4": ["Investor Centre", "投资者中心"],
     "foot.copy": ["© 2026 PERSISTENCE GOLD GROUP LTD · HKEX 2489 · ALL RIGHTS RESERVED", "© 2026 集海黄金集团有限公司 · 港交所 2489 · 版权所有"],
-    "foot.note": ["DESIGN CONCEPT — NOT AN OFFICIAL COMPANY PUBLICATION", "设计概念稿——非公司官方发布"]
+    "foot.note": ["DESIGN CONCEPT — NOT AN OFFICIAL COMPANY PUBLICATION", "设计概念稿——非公司官方发布"],
+    "a11y.skip": ["Skip to content", "跳至正文"],
+    "gov.c1": ["Audit Committee", "审核委员会"],
+    "gov.c2": ["Remuneration Committee", "薪酬委员会"],
+    "gov.c3": ["Nomination Committee", "提名委员会"],
+    "gov.c4": ["ESG Committee", "ESG委员会"],
+    "gov.c5": ["Risk Management Committee", "风险管理委员会"]
   };
   const TITLES = { en: "Persistence Gold — Website Redesign Concept", zh: "集海黄金集团 — 网站改版概念稿" };
 
@@ -890,11 +949,34 @@
   mobileMenu.querySelectorAll("a").forEach((a) =>
     a.addEventListener("click", () => document.body.classList.remove("menu-open")));
 
-  /* ================= sticky nav ================= */
+  /* ================= sticky nav + back-to-top ================= */
   const nav = document.getElementById("nav");
-  const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 40);
+  const toTop = document.getElementById("toTop");
+  const onScroll = () => {
+    nav.classList.toggle("scrolled", window.scrollY > 40);
+    toTop.classList.toggle("show", window.scrollY > window.innerHeight);
+  };
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
+  toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+  /* ================= scrollspy ================= */
+  const spyLinks = new Map();
+  document.querySelectorAll(".nav-links a[href^='#']").forEach((a) => {
+    const sec = document.querySelector(a.getAttribute("href"));
+    if (sec) spyLinks.set(sec, a);
+  });
+  const spy = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      const link = spyLinks.get(e.target);
+      if (!link) continue;
+      if (e.isIntersecting) {
+        document.querySelectorAll(".nav-links a.active").forEach((x) => x.classList.remove("active"));
+        link.classList.add("active");
+      }
+    }
+  }, { rootMargin: "-30% 0px -60% 0px" });
+  spyLinks.forEach((_, sec) => spy.observe(sec));
 
   /* ================= scroll reveal ================= */
   const io = new IntersectionObserver((entries) => {
@@ -928,6 +1010,59 @@
     }
   }, { threshold: 0.6 });
   counters.forEach((el) => cio.observe(el));
+
+  /* ================= hero gold dust ================= */
+  (() => {
+    const canvas = document.getElementById("dust");
+    const hero = canvas.parentElement;
+    const ctx = canvas.getContext("2d");
+    let w, h, dpr, parts = [];
+    const N = 70;
+
+    function resize() {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = hero.clientWidth; h = hero.clientHeight;
+      canvas.width = w * dpr; canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    function seed() {
+      parts = Array.from({ length: N }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: 0.6 + Math.random() * 1.7,
+        vy: 0.08 + Math.random() * 0.22,
+        vx: (Math.random() - 0.5) * 0.08,
+        tw: Math.random() * Math.PI * 2,
+        ts: 0.008 + Math.random() * 0.02
+      }));
+    }
+    function draw(animate) {
+      ctx.clearRect(0, 0, w, h);
+      for (const p of parts) {
+        const a = 0.12 + 0.5 * (0.5 + 0.5 * Math.sin(p.tw));
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(232, 198, 90," + a.toFixed(3) + ")";
+        ctx.fill();
+        if (!animate) continue;
+        p.tw += p.ts;
+        p.y -= p.vy; p.x += p.vx;
+        if (p.y < -4) { p.y = h + 4; p.x = Math.random() * w; }
+        if (p.x < -4) p.x = w + 4;
+        if (p.x > w + 4) p.x = -4;
+      }
+    }
+    resize(); seed();
+    if (reduced) { draw(false); window.addEventListener("resize", () => { resize(); seed(); draw(false); }); return; }
+    let heroVisible = true;
+    new IntersectionObserver((e) => { heroVisible = e[0].isIntersecting; }).observe(hero);
+    function loop() {
+      if (heroVisible && !document.hidden) draw(true);
+      requestAnimationFrame(loop);
+    }
+    window.addEventListener("resize", () => { resize(); seed(); });
+    requestAnimationFrame(loop);
+  })();
 </script>
 </body>
 </html>
