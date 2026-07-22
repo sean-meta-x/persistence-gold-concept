@@ -74,6 +74,7 @@
   }
   .ticker strong { color: var(--text); font-weight: 500; }
   .ticker .up { color: #6fc178; }
+  .ticker .down { color: #d9776f; }
   .ticker .tag {
     color: var(--gold); border: 1px solid var(--line);
     padding: 0.05rem 0.5rem; border-radius: 2px; font-size: 0.66rem;
@@ -446,12 +447,12 @@
 
 <a class="skip-link" href="#about" data-i18n="a11y.skip">Skip to content</a>
 
-<div class="ticker" aria-label="Market data">
+<div class="ticker" aria-label="Market data" title="Quotes may be delayed ~15 min · 行情数据或有约15分钟延迟">
   <span class="tag">HKEX 2489</span>
   <span class="tag" style="color:#e8c65a;" data-i18n="ticker.concept">DESIGN CONCEPT · INTERNAL REVIEW</span>
-  <span><strong>PERSISTENCE GOLD</strong>&nbsp; HK$0.710 <span class="up">▲ +0.030 (+4.41%)</span></span>
-  <span>HSI &nbsp;25,143.05 <span class="up">▲ +2.36%</span></span>
-  <span>GOLD (COMEX) &nbsp;US$3,412/oz</span>
+  <span><strong>PERSISTENCE GOLD</strong>&nbsp; <span id="q-px">HK$0.710</span> <span class="up" id="q-chg">▲ +0.030 (+4.41%)</span></span>
+  <span>HSI &nbsp;<span id="q-hsi">25,143.05</span> <span class="up" id="q-hsi-chg">▲ +2.36%</span></span>
+  <span>GOLD (COMEX) &nbsp;<span id="q-gold">US$3,412/oz</span></span>
 </div>
 
 <nav id="nav">
@@ -726,41 +727,41 @@
         are published through HKEXnews and mirrored here.
       </p>
       <div class="inv-links">
-        <a href="#investors" data-i18n="inv.l1">Announcements &amp; Circulars</a>
-        <a href="#investors" data-i18n="inv.l2">Financial Statements</a>
-        <a href="#investors" data-i18n="inv.l3">Prospectus</a>
-        <a href="#investors" data-i18n="inv.l4">Corporate Governance</a>
-        <a href="#investors" data-i18n="inv.l5">Corporate Communications</a>
+        <a data-i18n="inv.l1" data-href-en="https://persistencegold.com/investors/" data-href-zh="https://persistencegold.com/zh/investors/" href="https://persistencegold.com/investors/" target="_blank" rel="noopener">Announcements &amp; Circulars</a>
+        <a data-i18n="inv.l2" data-href-en="https://persistencegold.com/investors/" data-href-zh="https://persistencegold.com/zh/investors/" href="https://persistencegold.com/investors/" target="_blank" rel="noopener">Financial Statements</a>
+        <a data-i18n="inv.l3" data-href-en="https://persistencegold.com/investors/" data-href-zh="https://persistencegold.com/zh/investors/" href="https://persistencegold.com/investors/" target="_blank" rel="noopener">Prospectus</a>
+        <a data-i18n="inv.l4" data-href-en="https://persistencegold.com/investors/" data-href-zh="https://persistencegold.com/zh/investors/" href="https://persistencegold.com/investors/" target="_blank" rel="noopener">Corporate Governance</a>
+        <a data-i18n="inv.l6" data-href-en="https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=en" data-href-zh="https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=zh" href="https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=en" target="_blank" rel="noopener">HKEXnews Filings</a>
       </div>
     </div>
     <div class="ann-list reveal" aria-label="Latest announcements">
-      <a class="ann" href="#investors">
+      <a class="ann" href="https://persistencegold.com/wp-content/uploads/2026/07/MARKET-SHARE-REPURCHASE.pdf" target="_blank" rel="noopener">
         <span class="d">2026·07</span>
         <span class="t" data-i18n="ann1.t">Voluntary Announcement — Plan to Conduct On-Market Share Repurchase</span>
         <span class="c" data-i18n="ann1.c">Announcement</span>
       </a>
-      <a class="ann" href="#investors">
+      <a class="ann" href="https://persistencegold.com/wp-content/uploads/2026/06/AGM-POLL-RESULTS-26-JUNE-2026.pdf" target="_blank" rel="noopener">
         <span class="d">2026·06</span>
         <span class="t" data-i18n="ann2.t">Poll Results of the Annual General Meeting held on 26 June 2026</span>
         <span class="c" data-i18n="ann2.c">AGM</span>
       </a>
-      <a class="ann" href="#investors">
-        <span class="d">2026·04</span>
-        <span class="t" data-i18n="ann3.t">Inside Information — Resumption of Production of Yantai Zhongjia &amp; Yantai Mujin</span>
+      <a class="ann" href="https://persistencegold.com/wp-content/uploads/2026/03/20260322.pdf" target="_blank" rel="noopener">
+        <span class="d">2026·03</span>
+        <span class="t" data-i18n="ann3.t">Inside Information — Resumption of Production of Yantai Mujin</span>
         <span class="c" data-i18n="ann3.c">Inside Info</span>
       </a>
-      <a class="ann" href="#investors">
+      <a class="ann" href="https://persistencegold.com/wp-content/uploads/2026/03/ANNUAL-RESULTS-ANNOUNCEMENT-31-DECEMBER-2025.pdf" target="_blank" rel="noopener">
         <span class="d">2026·03</span>
         <span class="t" data-i18n="ann4.t">Annual Results Announcement for the Year Ended 31 December 2025</span>
         <span class="c" data-i18n="ann4.c">Results</span>
       </a>
-      <a class="ann" href="#investors">
-        <span class="d">2025·12</span>
+      <a class="ann" href="https://persistencegold.com/wp-content/uploads/2026/01/CHANGE-OF-COMPANY-NAME-STOCK-SHORT-NAMECOMPANY-WEBSITE.pdf" target="_blank" rel="noopener">
+        <span class="d">2026·01</span>
         <span class="t" data-i18n="ann5.t">Change of Company Name, Stock Short Name and Company Website</span>
         <span class="c" data-i18n="ann5.c">Corporate</span>
       </a>
-      <a class="ann" href="#investors">
-        <span class="d">2025·11</span>
+      <a class="ann" href="https://persistencegold.com/wp-content/uploads/2025/10/COMPLETION-OF-PLACING.pdf" target="_blank" rel="noopener">
+        <span class="d">2025·10</span>
         <span class="t" data-i18n="ann6.t">Completion of Placing of New Shares under the General Mandate</span>
         <span class="c" data-i18n="ann6.c">Placing</span>
       </a>
@@ -889,12 +890,12 @@
     "inv.l2": ["Financial Statements", "财务报表"],
     "inv.l3": ["Prospectus", "招股章程"],
     "inv.l4": ["Corporate Governance", "企业管治"],
-    "inv.l5": ["Corporate Communications", "公司通讯"],
+    "inv.l6": ["HKEXnews Filings", "披露易文件"],
     "ann1.t": ["Voluntary Announcement — Plan to Conduct On-Market Share Repurchase", "自愿公告——拟于市场上回购股份"],
     "ann1.c": ["Announcement", "公告"],
     "ann2.t": ["Poll Results of the Annual General Meeting held on 26 June 2026", "于2026年6月26日举行的股东周年大会投票结果"],
     "ann2.c": ["AGM", "股东大会"],
-    "ann3.t": ["Inside Information — Resumption of Production of Yantai Zhongjia &amp; Yantai Mujin", "内幕消息——烟台中嘉及烟台牟金恢复生产"],
+    "ann3.t": ["Inside Information — Resumption of Production of Yantai Mujin", "内幕消息——烟台牟金恢复生产"],
     "ann3.c": ["Inside Info", "内幕消息"],
     "ann4.t": ["Annual Results Announcement for the Year Ended 31 December 2025", "截至2025年12月31日止年度之全年业绩公告"],
     "ann4.c": ["Results", "业绩"],
@@ -933,6 +934,9 @@
     document.querySelectorAll("[data-i18n]").forEach((el) => {
       const entry = I18N[el.dataset.i18n];
       if (entry) el.innerHTML = entry[idx];
+    });
+    document.querySelectorAll("[data-href-en]").forEach((el) => {
+      el.href = lang === "zh" ? el.dataset.hrefZh : el.dataset.hrefEn;
     });
     document.documentElement.lang = lang;
     document.title = TITLES[lang];
@@ -1062,6 +1066,52 @@
     }
     window.addEventListener("resize", () => { resize(); seed(); });
     requestAnimationFrame(loop);
+  })();
+
+  /* ================= live quotes (Tencent Finance, ~15 min delayed) ================= */
+  (() => {
+    const $q = (id) => document.getElementById(id);
+    const fmt = (n, d) => n.toLocaleString("en", { minimumFractionDigits: d, maximumFractionDigits: d });
+    function applyQuotes() {
+      try {
+        if (typeof window.v_hk02489 === "string") {
+          const p = window.v_hk02489.split("~");
+          const px = parseFloat(p[3]), prev = parseFloat(p[4]);
+          if (px > 0 && prev > 0) {
+            const chg = px - prev, pct = (chg / prev) * 100, up = chg >= 0;
+            $q("q-px").textContent = "HK$" + fmt(px, 3);
+            const el = $q("q-chg");
+            el.textContent = (up ? "▲ +" : "▼ ") + fmt(chg, 3) + " (" + (up ? "+" : "") + fmt(pct, 2) + "%)";
+            el.classList.toggle("up", up); el.classList.toggle("down", !up);
+          }
+        }
+        if (typeof window.v_hkHSI === "string") {
+          const p = window.v_hkHSI.split("~");
+          const px = parseFloat(p[3]), prev = parseFloat(p[4]);
+          if (px > 0 && prev > 0) {
+            const pct = ((px - prev) / prev) * 100, up = pct >= 0;
+            $q("q-hsi").textContent = fmt(px, 2);
+            const el = $q("q-hsi-chg");
+            el.textContent = (up ? "▲ +" : "▼ ") + fmt(pct, 2) + "%";
+            el.classList.toggle("up", up); el.classList.toggle("down", !up);
+          }
+        }
+        if (typeof window.v_hf_GC === "string") {
+          const g = parseFloat(window.v_hf_GC.split(",")[0]);
+          if (g > 0) $q("q-gold").textContent = "US$" + fmt(g, 0) + "/oz";
+        }
+      } catch (e) { /* keep static fallback values already in the DOM */ }
+    }
+    function poll() {
+      const s = document.createElement("script");
+      s.src = "https://qt.gtimg.cn/q=hk02489,hkHSI,hf_GC&_=" + Date.now();
+      s.charset = "GBK";
+      s.onload = () => { applyQuotes(); s.remove(); };
+      s.onerror = () => s.remove(); /* offline or blocked: static values remain */
+      document.body.appendChild(s);
+    }
+    poll();
+    setInterval(poll, 60000);
   })();
 </script>
 </body>
