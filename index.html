@@ -12,7 +12,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230e0c08'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia,serif' font-size='36' font-style='italic' fill='%23c9a227'%3EP%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Manrope:wght@300;400;500;600;700&family=Spline+Sans+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Manrope:wght@300;400;500;600;700&family=Spline+Sans+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --ink: #0e0c08;
@@ -48,7 +48,11 @@
     overflow-x: hidden;
   }
   ::selection { background: var(--gold); color: var(--ink); }
-  html[lang="zh"] body { letter-spacing: 0.01em; }
+  html[lang^="zh"] body { letter-spacing: 0.01em; }
+  html[lang="zh-Hant"] {
+    --serif: "Fraunces", "Noto Serif TC", Georgia, "Songti TC", "PMingLiU", serif;
+    --sans: "Manrope", "Noto Sans TC", "Segoe UI", "Microsoft JhengHei", -apple-system, sans-serif;
+  }
 
   /* ---------- grain + atmosphere ---------- */
   body::before {
@@ -108,7 +112,7 @@
     transition: color 0.25s;
     position: relative;
   }
-  html[lang="zh"] .nav-links a { letter-spacing: 0.2em; }
+  html[lang^="zh"] .nav-links a { letter-spacing: 0.2em; }
   .nav-links a::after {
     content: ""; position: absolute; left: 0; bottom: -6px; height: 1px; width: 0;
     background: var(--gold); transition: width 0.3s var(--ease);
@@ -124,13 +128,16 @@
   }
   .nav-cta:hover { background: var(--gold); color: var(--ink) !important; }
   .nav-cta::after { display: none; }
-  .lang-btn {
-    background: none; border: 1px solid var(--line-soft); color: var(--text-dim);
-    font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
-    padding: 0.45rem 0.85rem; border-radius: 2px; cursor: pointer;
-    transition: color 0.25s, border-color 0.25s;
+  .lang-seg { display: flex; border: 1px solid var(--line-soft); border-radius: 2px; overflow: hidden; }
+  .lang-seg button {
+    background: none; border: none; color: var(--text-dim);
+    font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.05em;
+    padding: 0.45rem 0.7rem; cursor: pointer;
+    transition: color 0.25s, background 0.25s;
   }
-  .lang-btn:hover, .lang-btn:focus-visible { color: var(--gold-bright); border-color: var(--gold-dim); }
+  .lang-seg button + button { border-left: 1px solid var(--line-soft); }
+  .lang-seg button:hover, .lang-seg button:focus-visible { color: var(--gold-bright); }
+  .lang-seg button.on { background: var(--gold); color: var(--ink); font-weight: 500; }
 
   /* mobile menu */
   .menu-btn {
@@ -205,13 +212,13 @@
     line-height: 1.06; letter-spacing: -0.015em;
     max-width: 13ch; color: var(--text);
   }
-  html[lang="zh"] h1 { font-weight: 400; letter-spacing: 0.02em; max-width: 15ch; }
+  html[lang^="zh"] h1 { font-weight: 400; letter-spacing: 0.02em; max-width: 15ch; }
   h1 .gold {
     font-weight: 500; font-style: italic;
     background: linear-gradient(100deg, #f0d47a 0%, var(--gold) 45%, #9a7b1c 80%);
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
-  html[lang="zh"] h1 .gold { font-style: normal; white-space: nowrap; }
+  html[lang^="zh"] h1 .gold { font-style: normal; white-space: nowrap; }
   .hero-sub {
     max-width: 46ch; color: var(--text-dim);
     font-size: clamp(0.95rem, 0.85rem + 0.4vw, 1.1rem); font-weight: 400;
@@ -228,7 +235,7 @@
     text-decoration: none; padding: 0.9rem 1.6rem; border-radius: 2px;
     transition: transform 0.25s var(--ease), background 0.25s, color 0.25s, border-color 0.25s;
   }
-  html[lang="zh"] .btn { letter-spacing: 0.24em; }
+  html[lang^="zh"] .btn { letter-spacing: 0.24em; }
   .btn-gold { background: var(--gold); color: var(--ink); }
   .btn-gold:hover { background: var(--gold-bright); transform: translateY(-2px); }
   .btn-ghost { border: 1px solid var(--line-soft); color: var(--text); }
@@ -255,9 +262,9 @@
     font-family: var(--serif); font-weight: 400;
     font-size: clamp(1.9rem, 1.2rem + 2.8vw, 3.4rem); line-height: 1.15; letter-spacing: -0.01em;
   }
-  html[lang="zh"] .sec-title { letter-spacing: 0.03em; }
+  html[lang^="zh"] .sec-title { letter-spacing: 0.03em; }
   .sec-title em { font-style: italic; color: var(--gold-bright); }
-  html[lang="zh"] .sec-title em { font-style: normal; }
+  html[lang^="zh"] .sec-title em { font-style: normal; }
   .light .sec-title em { color: var(--gold-dim); }
 
   /* reveal */
@@ -277,7 +284,7 @@
     font-family: var(--serif); font-weight: 300;
     font-size: clamp(1.25rem, 1rem + 1.1vw, 1.8rem); line-height: 1.5; color: var(--text);
   }
-  html[lang="zh"] .about-lede { font-weight: 400; }
+  html[lang^="zh"] .about-lede { font-weight: 400; }
   .about-lede strong { color: var(--gold-bright); font-weight: 500; }
   .about-body { color: var(--text-dim); margin-top: 1.6rem; max-width: 58ch; }
   .about-body + .about-body { margin-top: 1rem; }
@@ -458,9 +465,9 @@
   }
   .foot-grid { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr) minmax(0, 2fr); gap: clamp(2rem, 4vw, 5rem); }
   .foot-title { font-family: var(--serif); font-weight: 300; font-size: clamp(1.8rem, 1.2rem + 2.4vw, 3rem); line-height: 1.2; max-width: 16ch; }
-  html[lang="zh"] .foot-title { font-weight: 400; }
+  html[lang^="zh"] .foot-title { font-weight: 400; }
   .foot-title em { font-style: italic; color: var(--gold-bright); }
-  html[lang="zh"] .foot-title em { font-style: normal; }
+  html[lang^="zh"] .foot-title em { font-style: normal; }
   .foot-col h5 { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 1.1rem; font-weight: 700; }
   .foot-col a, .foot-col p { display: block; color: var(--text); text-decoration: none; font-size: 0.92rem; margin-bottom: 0.55rem; }
   .foot-col a:hover { color: var(--gold-bright); }
@@ -527,7 +534,11 @@
     <a href="#esg">ESG</a>
     <a href="#investors" data-i18n="nav.inv">Investors</a>
     <a class="nav-cta" href="#contact" data-i18n="nav.contact">Contact</a>
-    <button class="lang-btn" id="langBtn" type="button" aria-label="Switch language">中文</button>
+    <span class="lang-seg" id="langSeg" role="group" aria-label="Language">
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="zh">简</button>
+      <button type="button" data-lang="hk">繁</button>
+    </span>
     <button class="menu-btn" id="menuBtn" type="button" aria-label="Menu"><span></span></button>
   </div>
 </nav>
@@ -867,10 +878,10 @@
         are published through HKEXnews and mirrored here.
       </p>
       <div class="inv-links">
-        <a data-i18n="inv.l1" data-href-en="https://persistencegold.com/investors/" data-href-zh="https://persistencegold.com/zh/investors/" href="https://persistencegold.com/investors/" target="_blank" rel="noopener">Announcements &amp; Circulars</a>
-        <a data-i18n="inv.l2" data-href-en="https://persistencegold.com/investors/" data-href-zh="https://persistencegold.com/zh/investors/" href="https://persistencegold.com/investors/" target="_blank" rel="noopener">Financial Statements</a>
-        <a data-i18n="inv.l3" data-href-en="https://persistencegold.com/investors/" data-href-zh="https://persistencegold.com/zh/investors/" href="https://persistencegold.com/investors/" target="_blank" rel="noopener">Prospectus</a>
-        <a data-i18n="inv.l4" data-href-en="https://persistencegold.com/investors/" data-href-zh="https://persistencegold.com/zh/investors/" href="https://persistencegold.com/investors/" target="_blank" rel="noopener">Corporate Governance</a>
+        <a data-i18n="inv.l1" data-href-en="https://persistencegold.com/investors/" data-href-zh="https://persistencegold.com/zh/investors/" data-href-hk="https://persistencegold.com/zh_hk/investors/" href="https://persistencegold.com/investors/" target="_blank" rel="noopener">Announcements &amp; Circulars</a>
+        <a data-i18n="inv.l2" data-href-en="https://persistencegold.com/investors/" data-href-zh="https://persistencegold.com/zh/investors/" data-href-hk="https://persistencegold.com/zh_hk/investors/" href="https://persistencegold.com/investors/" target="_blank" rel="noopener">Financial Statements</a>
+        <a data-i18n="inv.l3" data-href-en="https://persistencegold.com/investors/" data-href-zh="https://persistencegold.com/zh/investors/" data-href-hk="https://persistencegold.com/zh_hk/investors/" href="https://persistencegold.com/investors/" target="_blank" rel="noopener">Prospectus</a>
+        <a data-i18n="inv.l4" data-href-en="https://persistencegold.com/investors/" data-href-zh="https://persistencegold.com/zh/investors/" data-href-hk="https://persistencegold.com/zh_hk/investors/" href="https://persistencegold.com/investors/" target="_blank" rel="noopener">Corporate Governance</a>
         <a data-i18n="inv.l6" data-href-en="https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=en" data-href-zh="https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=zh" href="https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=en" target="_blank" rel="noopener">HKEXnews Filings</a>
       </div>
       <div class="spark-card" id="sparkCard" hidden>
@@ -921,171 +932,655 @@
 <script>
   /* ================= i18n ================= */
   const I18N = {
-    "ticker.concept": ["DESIGN CONCEPT · INTERNAL REVIEW", "设计概念稿 · 内部评审"],
-    "brand": ["PERSISTENCE <em>GOLD</em>", "集海<em>黄金</em>集团"],
-    "nav.about": ["About", "关于我们"],
-    "nav.ops": ["Operations", "矿山项目"],
-    "nav.res": ["Resources", "储量资源"],
-    "nav.inv": ["Investors", "投资者关系"],
-    "nav.contact": ["Contact", "联系我们"],
-    "hero.kicker": ["Shandong Gold Belt · Producing Since 2011", "山东黄金成矿带 · 2011年投产至今"],
-    "hero.title": ["Mining gold with <span class=\"gold\">persistence</span>, discipline &amp; care.", "恒心致远，<span class=\"gold\">金石为开</span>。"],
-    "hero.sub": ["Persistence Gold Group (HKEX: 2489) operates the Songjiagou open-pit and underground gold mines in Yantai, Shandong — one of China's most prolific gold provinces — with a controlling interest in three further underground mines at Yantai Mujin.",
-      "集海黄金集团（港交所：2489）在中国最重要的黄金产区之一——山东烟台，运营宋家沟露天矿及宋家沟地下矿，并控股烟台牟金矿业旗下三座地下金矿。"],
-    "hero.cta1": ["Our Operations", "矿山项目"],
-    "hero.cta2": ["Investor Centre", "投资者中心"],
-    "hero.stat1": ["Mining Licences", "采矿许可证"],
-    "hero.unit2": ["kt/yr", "千吨/年"],
-    "hero.stat2": ["Ore Processing Capacity", "年选矿产能"],
-    "hero.stat3": ["Probable Ore Reserves", "概略矿石储量"],
-    "sec1.title": ["A focused gold producer<br>in <em>Shandong Province</em>", "深耕<em>山东</em>的黄金生产商"],
-    "about.lede": ["From a single open-pit operation in 2011 to a listed group with <strong>two producing mines and three development-stage underground mines</strong>, we grow by operating efficiently, acquiring selectively, and mining responsibly.",
-      "从2011年的一座露天矿起步，到今天拥有<strong>两座在产矿山与三座待开发地下金矿</strong>的上市集团——我们以高效运营、审慎并购与负责任开采实现增长。"],
-    "about.p1": ["Persistence Gold Group Ltd (formerly Persistence Resources Group Ltd) was incorporated in the Cayman Islands on 21 May 2019. Through Majestic Yantai Gold Ltd (BVI), the Group holds 75% of Yantai Zhongjia Mining — operator of the Songjiagou open-pit and underground mines — alongside partner Yantai Dahedong Mineral Processing.",
-      "集海黄金集团有限公司（前称集海资源集团有限公司）于2019年5月21日在开曼群岛注册成立。集团通过全资子公司 Majestic Yantai Gold Ltd (BVI) 持有烟台中嘉矿业有限公司75%股权（另25%由烟台市大河东选矿有限公司持有），运营宋家沟露天矿及地下矿。"],
-    "about.p2": ["On 1 March 2025 the Group completed the acquisition of a 52% controlling interest in Yantai Mujin Mining, adding the Denggezhuang, Chahe and Heiniutai underground mines and materially increasing the Group's high-grade resource base.",
-      "2025年3月1日，集团完成收购烟台牟金矿业52%控股权益，新增邓格庄、岔河、黑牛台三座地下矿山，显著扩充了集团的高品位资源储备。"],
-    "tl1.h": ["Songjiagou Open-Pit enters commercial production", "宋家沟露天矿投入商业化生产"],
-    "tl1.p": ["Foundation asset in the Muping–Rushan gold belt, Yantai.", "位于烟台牟平—乳山成矿带的奠基性资产。"],
-    "tl2.h": ["Group incorporated · Underground mine commissioned", "集团注册成立 · 地下矿建成投产"],
-    "tl2.p": ["Songjiagou Underground Mine reaches commercial production in September.", "宋家沟地下矿于9月投入商业化生产。"],
-    "tl3.h": ["Listed on the Hong Kong Stock Exchange", "于香港联合交易所主板上市"],
-    "tl3.p": ["IPO completed in December 2023 under stock code 2489.", "2023年12月完成首次公开发售，股份代号2489。"],
-    "tl4.h": ["Controlling stake in Yantai Mujin Mining", "控股烟台牟金矿业"],
-    "tl4.p": ["52% interest acquired; renamed Persistence Gold Group in December.", "收购52%股权；同年12月更名为集海黄金集团。"],
-    "sec2.title": ["Operations &amp; <em>growth projects</em>", "矿山业务与<em>增长项目</em>"],
-    "ops.intro": ["All Group assets sit within Yantai, Shandong — a district that has produced gold for centuries and hosts modern infrastructure, skilled labour and established processing capacity, including the Group's own 2,000 kt-per-annum plant.",
-      "集团全部资产均位于山东烟台——这里产金历史悠久，基础设施完善、技术人才充足，选矿配套成熟。集团自有选矿厂年处理能力约200万吨（6千吨/日）。"],
-    "op1.h": ["Songjiagou<br>Open-Pit Mine", "宋家沟露天矿"],
-    "op2.h": ["Songjiagou<br>Underground Mine", "宋家沟地下矿"],
-    "op3.h": ["Yantai Mujin<br>Mining", "烟台牟金矿业"],
-    "chip.prod": ["Producing", "生产中"],
-    "chip.75": ["75% interest", "持股75%"],
-    "chip.hg": ["High grade", "高品位"],
-    "chip.52": ["52% interest", "持股52%"],
-    "op1.p": ["In commercial production since May 2011. The cornerstone of the Group: bulk-tonnage open-pit mining feeding the adjacent processing plant, with ore treated into gold concentrate on site.",
-      "2011年5月起投入商业化生产，是集团的基石资产：大规模露天开采，矿石就地运往毗邻选矿厂加工为金精矿。"],
-    "op2.p": ["Commissioned in September 2019, extending the Songjiagou system at depth with higher-grade underground ore that complements open-pit mill feed.",
-      "2019年9月建成投产，向深部延伸宋家沟矿床系统，以更高品位的地下矿石补充露天矿的入选矿量。"],
-    "op3.p": ["Three licensed underground mines — Denggezhuang, Chahe and Heiniutai — acquired in March 2025. Denggezhuang alone hosts indicated resources averaging 6.0 g/t Au.",
-      "2025年3月收购，持有邓格庄、岔河、黑牛台三宗采矿权。其中邓格庄矿区控制资源量平均金品位高达6.0克/吨。"],
-    "kv.res": ["Probable Reserves", "概略储量"],
-    "kv.grade": ["Reserve Grade", "储量品位"],
-    "sec3.title": ["Reserve &amp; resource <em>statement</em>", "储量与资源量<em>声明</em>"],
-    "res.note": ["Songjiagou figures as at 30 June 2023; Yantai Mujin figures as at 30 June 2024, per the Company's published technical statements. Mineral resources are reported inclusive of mineral reserves. Tonnages in thousand tonnes (kt); grades in grams of gold per tonne.",
-      "宋家沟数据截至2023年6月30日，烟台牟金数据截至2024年6月30日，均引自公司已刊发的技术声明。矿产资源量包含矿石储量。矿量单位为千吨（kt），品位单位为克/吨（金）。"],
-    "res.b1": ["Songjiagou Open-Pit", "宋家沟露天矿"],
-    "res.c1": ["CUT-OFF 0.3 G/T AU", "边界品位 0.3 克/吨"],
-    "res.b2": ["Songjiagou Underground", "宋家沟地下矿"],
-    "res.c2": ["CUT-OFF 0.7 G/T AU", "边界品位 0.7 克/吨"],
-    "res.b3": ["Yantai Mujin — Denggezhuang · Chahe · Heiniutai", "烟台牟金——邓格庄 · 岔河 · 黑牛台"],
-    "res.c3": ["CUT-OFF 1.9 / 1.0 / 1.0 G/T AU", "边界品位 1.9 / 1.0 / 1.0 克/吨"],
-    "tbl.cat": ["Category", "类别"],
-    "tbl.mine": ["Mine / Category", "矿区 / 类别"],
-    "tbl.ton": ["Tonnage (kt)", "矿量（千吨）"],
-    "tbl.grade": ["Grade (g/t Au)", "平均金品位（克/吨）"],
-    "r.prob": ["Probable Mineral Reserves", "概略矿石储量"],
-    "r.ind": ["Indicated Mineral Resources", "控制资源量"],
-    "r.inf": ["Inferred Mineral Resources", "推断矿产资源量"],
-    "m.dgz.prob": ["Denggezhuang — Probable Reserves", "邓格庄——概略矿石储量"],
-    "m.dgz.ind": ["Denggezhuang — Indicated Resources", "邓格庄——控制资源量"],
-    "m.dgz.inf": ["Denggezhuang — Inferred Resources", "邓格庄——推断矿产资源量"],
-    "m.ch.ind": ["Chahe — Indicated Resources", "岔河——控制资源量"],
-    "m.ch.inf": ["Chahe — Inferred Resources", "岔河——推断矿产资源量"],
-    "m.hnt.ind": ["Heiniutai — Indicated Resources", "黑牛台——控制资源量"],
-    "m.hnt.inf": ["Heiniutai — Inferred Resources", "黑牛台——推断矿产资源量"],
-    "sec4.title": ["Responsible mining,<br><em>long-term value</em>", "负责任采矿，<br>创造<em>长期价值</em>"],
-    "esg.e.h": ["Environment", "环境"],
-    "esg.e.p": ["Efficient, low-carbon operations with progressive rehabilitation, water recycling and tailings stewardship — creating a long-term, low-carbon environment for the communities that host us.",
-      "高效、安全和可持续的黄金开采，推进复垦复绿、水循环利用与尾矿管理——为社会创造长期低碳环境。"],
-    "esg.s.h": ["Safety &amp; Society", "安全与社会"],
-    "esg.s.p": ["Security as the core of everything we do underground and in the pit. We invest in local employment, skills and community programmes across Yantai.",
-      "安全为核心——贯穿井下与露天作业的每个环节。我们持续投入烟台本地就业、技能培训与社区共建。"],
-    "esg.g.h": ["Governance", "治理"],
-    "esg.g.p": ["A dedicated board-level ESG Committee and Risk Management Committee, established 2025, oversee disclosure, ethics and sustainable-investment standards.",
-      "2025年设立董事会层面的ESG委员会与风险管理委员会，统筹信息披露、商业道德与可持续投资标准。"],
-    "sec5.title": ["Investor <em>centre</em>", "投资者<em>中心</em>"],
-    "inv.p": ["Persistence Gold Group is listed on the Main Board of the Hong Kong Stock Exchange under stock code <strong style=\"color: var(--gold-bright);\">2489</strong>. Announcements, circulars, financial statements and corporate-governance documents are published through HKEXnews and mirrored here.",
-      "集海黄金集团于香港联合交易所主板上市，股份代号 <strong style=\"color: var(--gold-bright);\">2489</strong>。公告、通函、财务报表及企业管治文件均通过港交所披露易发布，并在本网站同步展示。"],
-    "inv.l1": ["Announcements &amp; Circulars", "公告及通函"],
-    "inv.l2": ["Financial Statements", "财务报表"],
-    "inv.l3": ["Prospectus", "招股章程"],
-    "inv.l4": ["Corporate Governance", "企业管治"],
-    "inv.l6": ["HKEXnews Filings", "披露易文件"],
-    "foot.title": ["Creating <em>long-term value</em> for shareholders &amp; society.", "为股东与社会创造<em>长期价值</em>。"],
-    "foot.c.h": ["Contact", "联系我们"],
-    "foot.c.sub": ["Investor &amp; media enquiries<br>Hong Kong · Yantai, Shandong", "投资者及媒体查询<br>香港 · 山东烟台"],
-    "foot.s.h": ["Site", "网站导航"],
-    "foot.a1": ["About Us", "关于我们"],
-    "foot.a2": ["Operations", "矿山项目"],
-    "foot.a3": ["Reserves &amp; Resources", "储量资源"],
-    "foot.a4": ["Investor Centre", "投资者中心"],
-    "foot.copy": ["© 2026 PERSISTENCE GOLD GROUP LTD · HKEX 2489 · ALL RIGHTS RESERVED", "© 2026 集海黄金集团有限公司 · 港交所 2489 · 版权所有"],
-    "foot.note": ["DESIGN CONCEPT — NOT AN OFFICIAL COMPANY PUBLICATION", "设计概念稿——非公司官方发布"],
-    "a11y.skip": ["Skip to content", "跳至正文"],
-    "nav.fin": ["Financials", "财务表现"],
-    "secfin.title": ["FY2025 financial <em>highlights</em>", "2025财年<em>财务亮点</em>"],
-    "fin.note": ["Extracted from the audited Annual Results Announcement for the year ended 31 December 2025, published March 2026. Currency: RMB. Comparatives are FY2024.",
-      "摘自截至2025年12月31日止年度之经审核全年业绩公告（2026年3月刊发）。货币单位：人民币。对比期为2024财年。"],
-    "fin.u.m": ["RMB M", "百万元"],
-    "fin.u.cents": ["RMB cents", "人民币·分"],
-    "fin.l1": ["Revenue", "营业收入"],
-    "fin.d1": ["▲ +25.9% YoY", "▲ 同比 +25.9%"],
-    "fin.l2": ["Gross Margin", "毛利率"],
-    "fin.d2": ["2024: 50.8%", "2024年：50.8%"],
-    "fin.l3": ["Net Profit", "年度净利润"],
-    "fin.d3": ["▼ −1.6% YoY", "▼ 同比 −1.6%"],
-    "fin.l4": ["Profit Attributable to Owners", "归母净利润"],
-    "fin.d4": ["▲ +5.6% YoY", "▲ 同比 +5.6%"],
-    "fin.l5": ["Basic &amp; Diluted EPS", "每股基本及摊薄盈利"],
-    "fin.d5": ["▲ +1.1% YoY", "▲ 同比 +1.1%"],
-    "fin.l6": ["Cash &amp; Cash Equivalents", "现金及现金等价物"],
-    "fin.d6": ["▲ +70.8% vs FY2024", "▲ 较2024财年 +70.8%"],
-    "fin.ct": ["Revenue &amp; profit — FY2024 vs FY2025 (RMB million)", "营收与利润——2024 vs 2025财年（人民币百万元）"],
-    "fin.lg24": ["FY2024", "2024财年"],
-    "fin.lg25": ["FY2025", "2025财年"],
-    "fin.g1": ["Revenue", "营业收入"],
-    "fin.g2": ["Gross Profit", "毛利"],
-    "fin.g3": ["Attributable Profit", "归母净利润"],
-    "spark.t": ["52-Week Share Price (HKD)", "52周股价走势（港元）"],
-    "gov.c1": ["Audit Committee", "审核委员会"],
-    "gov.c2": ["Remuneration Committee", "薪酬委员会"],
-    "gov.c3": ["Nomination Committee", "提名委员会"],
-    "gov.c4": ["ESG Committee", "ESG委员会"],
-    "gov.c5": ["Risk Management Committee", "风险管理委员会"]
+  "ticker.concept": [
+    "DESIGN CONCEPT · INTERNAL REVIEW",
+    "设计概念稿 · 内部评审",
+    "設計概念稿 · 內部評審"
+  ],
+  "brand": [
+    "PERSISTENCE <em>GOLD</em>",
+    "集海<em>黄金</em>集团",
+    "集海<em>黃金</em>集團"
+  ],
+  "nav.about": [
+    "About",
+    "关于我们",
+    "關於我們"
+  ],
+  "nav.ops": [
+    "Operations",
+    "矿山项目",
+    "礦山項目"
+  ],
+  "nav.res": [
+    "Resources",
+    "储量资源",
+    "儲量資源"
+  ],
+  "nav.inv": [
+    "Investors",
+    "投资者关系",
+    "投資者關係"
+  ],
+  "nav.contact": [
+    "Contact",
+    "联系我们",
+    "聯繫我們"
+  ],
+  "hero.kicker": [
+    "Shandong Gold Belt · Producing Since 2011",
+    "山东黄金成矿带 · 2011年投产至今",
+    "山東黃金成礦帶 · 2011年投產至今"
+  ],
+  "hero.title": [
+    "Mining gold with <span class=\"gold\">persistence</span>, discipline &amp; care.",
+    "恒心致远，<span class=\"gold\">金石为开</span>。",
+    "恆心致遠，<span class=\"gold\">金石為開</span>。"
+  ],
+  "hero.sub": [
+    "Persistence Gold Group (HKEX: 2489) operates the Songjiagou open-pit and underground gold mines in Yantai, Shandong — one of China's most prolific gold provinces — with a controlling interest in three further underground mines at Yantai Mujin.",
+    "集海黄金集团（港交所：2489）在中国最重要的黄金产区之一——山东烟台，运营宋家沟露天矿及宋家沟地下矿，并控股烟台牟金矿业旗下三座地下金矿。",
+    "集海黃金集團（港交所：2489）在中國最重要的黃金產區之一——山東煙台，運營宋家溝露天礦及宋家溝地下礦，並控股煙台牟金礦業旗下三座地下金礦。"
+  ],
+  "hero.cta1": [
+    "Our Operations",
+    "矿山项目",
+    "礦山項目"
+  ],
+  "hero.cta2": [
+    "Investor Centre",
+    "投资者中心",
+    "投資者中心"
+  ],
+  "hero.stat1": [
+    "Mining Licences",
+    "采矿许可证",
+    "採礦許可證"
+  ],
+  "hero.unit2": [
+    "kt/yr",
+    "千吨/年",
+    "千噸/年"
+  ],
+  "hero.stat2": [
+    "Ore Processing Capacity",
+    "年选矿产能",
+    "年選礦產能"
+  ],
+  "hero.stat3": [
+    "Probable Ore Reserves",
+    "概略矿石储量",
+    "概略礦石儲量"
+  ],
+  "sec1.title": [
+    "A focused gold producer<br>in <em>Shandong Province</em>",
+    "深耕<em>山东</em>的黄金生产商",
+    "深耕<em>山東</em>的黃金生產商"
+  ],
+  "about.lede": [
+    "From a single open-pit operation in 2011 to a listed group with <strong>two producing mines and three development-stage underground mines</strong>, we grow by operating efficiently, acquiring selectively, and mining responsibly.",
+    "从2011年的一座露天矿起步，到今天拥有<strong>两座在产矿山与三座待开发地下金矿</strong>的上市集团——我们以高效运营、审慎并购与负责任开采实现增长。",
+    "從2011年的一座露天礦起步，到今天擁有<strong>兩座在產礦山與三座待開發地下金礦</strong>的上市集團——我們以高效運營、審慎併購與負責任開採實現增長。"
+  ],
+  "about.p1": [
+    "Persistence Gold Group Ltd (formerly Persistence Resources Group Ltd) was incorporated in the Cayman Islands on 21 May 2019. Through Majestic Yantai Gold Ltd (BVI), the Group holds 75% of Yantai Zhongjia Mining — operator of the Songjiagou open-pit and underground mines — alongside partner Yantai Dahedong Mineral Processing.",
+    "集海黄金集团有限公司（前称集海资源集团有限公司）于2019年5月21日在开曼群岛注册成立。集团通过全资子公司 Majestic Yantai Gold Ltd (BVI) 持有烟台中嘉矿业有限公司75%股权（另25%由烟台市大河东选矿有限公司持有），运营宋家沟露天矿及地下矿。",
+    "集海黃金集團有限公司（前稱集海資源集團有限公司）於2019年5月21日在開曼羣島註冊成立。集團通過全資子公司 Majestic Yantai Gold Ltd (BVI) 持有煙台中嘉礦業有限公司75%股權（另25%由煙台市大河東選礦有限公司持有），運營宋家溝露天礦及地下礦。"
+  ],
+  "about.p2": [
+    "On 1 March 2025 the Group completed the acquisition of a 52% controlling interest in Yantai Mujin Mining, adding the Denggezhuang, Chahe and Heiniutai underground mines and materially increasing the Group's high-grade resource base.",
+    "2025年3月1日，集团完成收购烟台牟金矿业52%控股权益，新增邓格庄、岔河、黑牛台三座地下矿山，显著扩充了集团的高品位资源储备。",
+    "2025年3月1日，集團完成收購煙台牟金礦業52%控股權益，新增鄧格莊、岔河、黑牛台三座地下礦山，顯著擴充了集團的高品位資源儲備。"
+  ],
+  "tl1.h": [
+    "Songjiagou Open-Pit enters commercial production",
+    "宋家沟露天矿投入商业化生产",
+    "宋家溝露天礦投入商業化生產"
+  ],
+  "tl1.p": [
+    "Foundation asset in the Muping–Rushan gold belt, Yantai.",
+    "位于烟台牟平—乳山成矿带的奠基性资产。",
+    "位於煙台牟平—乳山成礦帶的奠基性資產。"
+  ],
+  "tl2.h": [
+    "Group incorporated · Underground mine commissioned",
+    "集团注册成立 · 地下矿建成投产",
+    "集團註冊成立 · 地下礦建成投產"
+  ],
+  "tl2.p": [
+    "Songjiagou Underground Mine reaches commercial production in September.",
+    "宋家沟地下矿于9月投入商业化生产。",
+    "宋家溝地下礦於9月投入商業化生產。"
+  ],
+  "tl3.h": [
+    "Listed on the Hong Kong Stock Exchange",
+    "于香港联合交易所主板上市",
+    "於香港聯合交易所主板上市"
+  ],
+  "tl3.p": [
+    "IPO completed in December 2023 under stock code 2489.",
+    "2023年12月完成首次公开发售，股份代号2489。",
+    "2023年12月完成首次公開發售，股份代號2489。"
+  ],
+  "tl4.h": [
+    "Controlling stake in Yantai Mujin Mining",
+    "控股烟台牟金矿业",
+    "控股煙台牟金礦業"
+  ],
+  "tl4.p": [
+    "52% interest acquired; renamed Persistence Gold Group in December.",
+    "收购52%股权；同年12月更名为集海黄金集团。",
+    "收購52%股權；同年12月更名為集海黃金集團。"
+  ],
+  "sec2.title": [
+    "Operations &amp; <em>growth projects</em>",
+    "矿山业务与<em>增长项目</em>",
+    "礦山業務與<em>增長項目</em>"
+  ],
+  "ops.intro": [
+    "All Group assets sit within Yantai, Shandong — a district that has produced gold for centuries and hosts modern infrastructure, skilled labour and established processing capacity, including the Group's own 2,000 kt-per-annum plant.",
+    "集团全部资产均位于山东烟台——这里产金历史悠久，基础设施完善、技术人才充足，选矿配套成熟。集团自有选矿厂年处理能力约200万吨（6千吨/日）。",
+    "集團全部資產均位於山東煙台——這裏產金歷史悠久，基礎設施完善、技術人才充足，選礦配套成熟。集團自有選礦廠年處理能力約200萬噸（6千噸/日）。"
+  ],
+  "op1.h": [
+    "Songjiagou<br>Open-Pit Mine",
+    "宋家沟露天矿",
+    "宋家溝露天礦"
+  ],
+  "op2.h": [
+    "Songjiagou<br>Underground Mine",
+    "宋家沟地下矿",
+    "宋家溝地下礦"
+  ],
+  "op3.h": [
+    "Yantai Mujin<br>Mining",
+    "烟台牟金矿业",
+    "煙台牟金礦業"
+  ],
+  "chip.prod": [
+    "Producing",
+    "生产中",
+    "生產中"
+  ],
+  "chip.75": [
+    "75% interest",
+    "持股75%",
+    "持股75%"
+  ],
+  "chip.hg": [
+    "High grade",
+    "高品位",
+    "高品位"
+  ],
+  "chip.52": [
+    "52% interest",
+    "持股52%",
+    "持股52%"
+  ],
+  "op1.p": [
+    "In commercial production since May 2011. The cornerstone of the Group: bulk-tonnage open-pit mining feeding the adjacent processing plant, with ore treated into gold concentrate on site.",
+    "2011年5月起投入商业化生产，是集团的基石资产：大规模露天开采，矿石就地运往毗邻选矿厂加工为金精矿。",
+    "2011年5月起投入商業化生產，是集團的基石資產：大規模露天開採，礦石就地運往毗鄰選礦廠加工為金精礦。"
+  ],
+  "op2.p": [
+    "Commissioned in September 2019, extending the Songjiagou system at depth with higher-grade underground ore that complements open-pit mill feed.",
+    "2019年9月建成投产，向深部延伸宋家沟矿床系统，以更高品位的地下矿石补充露天矿的入选矿量。",
+    "2019年9月建成投產，向深部延伸宋家溝礦牀系統，以更高品位的地下礦石補充露天礦的入選礦量。"
+  ],
+  "op3.p": [
+    "Three licensed underground mines — Denggezhuang, Chahe and Heiniutai — acquired in March 2025. Denggezhuang alone hosts indicated resources averaging 6.0 g/t Au.",
+    "2025年3月收购，持有邓格庄、岔河、黑牛台三宗采矿权。其中邓格庄矿区控制资源量平均金品位高达6.0克/吨。",
+    "2025年3月收購，持有鄧格莊、岔河、黑牛台三宗採礦權。其中鄧格莊礦區控制資源量平均金品位高達6.0克/噸。"
+  ],
+  "kv.res": [
+    "Probable Reserves",
+    "概略储量",
+    "概略儲量"
+  ],
+  "kv.grade": [
+    "Reserve Grade",
+    "储量品位",
+    "儲量品位"
+  ],
+  "sec3.title": [
+    "Reserve &amp; resource <em>statement</em>",
+    "储量与资源量<em>声明</em>",
+    "儲量與資源量<em>聲明</em>"
+  ],
+  "res.note": [
+    "Songjiagou figures as at 30 June 2023; Yantai Mujin figures as at 30 June 2024, per the Company's published technical statements. Mineral resources are reported inclusive of mineral reserves. Tonnages in thousand tonnes (kt); grades in grams of gold per tonne.",
+    "宋家沟数据截至2023年6月30日，烟台牟金数据截至2024年6月30日，均引自公司已刊发的技术声明。矿产资源量包含矿石储量。矿量单位为千吨（kt），品位单位为克/吨（金）。",
+    "宋家溝數據截至2023年6月30日，煙台牟金數據截至2024年6月30日，均引自公司已刊發的技術聲明。礦產資源量包含礦石儲量。礦量單位為千噸（kt），品位單位為克/噸（金）。"
+  ],
+  "res.b1": [
+    "Songjiagou Open-Pit",
+    "宋家沟露天矿",
+    "宋家溝露天礦"
+  ],
+  "res.c1": [
+    "CUT-OFF 0.3 G/T AU",
+    "边界品位 0.3 克/吨",
+    "邊界品位 0.3 克/噸"
+  ],
+  "res.b2": [
+    "Songjiagou Underground",
+    "宋家沟地下矿",
+    "宋家溝地下礦"
+  ],
+  "res.c2": [
+    "CUT-OFF 0.7 G/T AU",
+    "边界品位 0.7 克/吨",
+    "邊界品位 0.7 克/噸"
+  ],
+  "res.b3": [
+    "Yantai Mujin — Denggezhuang · Chahe · Heiniutai",
+    "烟台牟金——邓格庄 · 岔河 · 黑牛台",
+    "煙台牟金——鄧格莊 · 岔河 · 黑牛台"
+  ],
+  "res.c3": [
+    "CUT-OFF 1.9 / 1.0 / 1.0 G/T AU",
+    "边界品位 1.9 / 1.0 / 1.0 克/吨",
+    "邊界品位 1.9 / 1.0 / 1.0 克/噸"
+  ],
+  "tbl.cat": [
+    "Category",
+    "类别",
+    "類別"
+  ],
+  "tbl.mine": [
+    "Mine / Category",
+    "矿区 / 类别",
+    "礦區 / 類別"
+  ],
+  "tbl.ton": [
+    "Tonnage (kt)",
+    "矿量（千吨）",
+    "礦量（千噸）"
+  ],
+  "tbl.grade": [
+    "Grade (g/t Au)",
+    "平均金品位（克/吨）",
+    "平均金品位（克/噸）"
+  ],
+  "r.prob": [
+    "Probable Mineral Reserves",
+    "概略矿石储量",
+    "概略礦石儲量"
+  ],
+  "r.ind": [
+    "Indicated Mineral Resources",
+    "控制资源量",
+    "控制資源量"
+  ],
+  "r.inf": [
+    "Inferred Mineral Resources",
+    "推断矿产资源量",
+    "推斷礦產資源量"
+  ],
+  "m.dgz.prob": [
+    "Denggezhuang — Probable Reserves",
+    "邓格庄——概略矿石储量",
+    "鄧格莊——概略礦石儲量"
+  ],
+  "m.dgz.ind": [
+    "Denggezhuang — Indicated Resources",
+    "邓格庄——控制资源量",
+    "鄧格莊——控制資源量"
+  ],
+  "m.dgz.inf": [
+    "Denggezhuang — Inferred Resources",
+    "邓格庄——推断矿产资源量",
+    "鄧格莊——推斷礦產資源量"
+  ],
+  "m.ch.ind": [
+    "Chahe — Indicated Resources",
+    "岔河——控制资源量",
+    "岔河——控制資源量"
+  ],
+  "m.ch.inf": [
+    "Chahe — Inferred Resources",
+    "岔河——推断矿产资源量",
+    "岔河——推斷礦產資源量"
+  ],
+  "m.hnt.ind": [
+    "Heiniutai — Indicated Resources",
+    "黑牛台——控制资源量",
+    "黑牛台——控制資源量"
+  ],
+  "m.hnt.inf": [
+    "Heiniutai — Inferred Resources",
+    "黑牛台——推断矿产资源量",
+    "黑牛台——推斷礦產資源量"
+  ],
+  "sec4.title": [
+    "Responsible mining,<br><em>long-term value</em>",
+    "负责任采矿，<br>创造<em>长期价值</em>",
+    "負責任採礦，<br>創造<em>長期價值</em>"
+  ],
+  "esg.e.h": [
+    "Environment",
+    "环境",
+    "環境"
+  ],
+  "esg.e.p": [
+    "Efficient, low-carbon operations with progressive rehabilitation, water recycling and tailings stewardship — creating a long-term, low-carbon environment for the communities that host us.",
+    "高效、安全和可持续的黄金开采，推进复垦复绿、水循环利用与尾矿管理——为社会创造长期低碳环境。",
+    "高效、安全和可持續的黃金開採，推進復墾複綠、水循環利用與尾礦管理——為社會創造長期低碳環境。"
+  ],
+  "esg.s.h": [
+    "Safety &amp; Society",
+    "安全与社会",
+    "安全與社會"
+  ],
+  "esg.s.p": [
+    "Security as the core of everything we do underground and in the pit. We invest in local employment, skills and community programmes across Yantai.",
+    "安全为核心——贯穿井下与露天作业的每个环节。我们持续投入烟台本地就业、技能培训与社区共建。",
+    "安全為核心——貫穿井下與露天作業的每個環節。我們持續投入煙台本地就業、技能培訓與社區共建。"
+  ],
+  "esg.g.h": [
+    "Governance",
+    "治理",
+    "治理"
+  ],
+  "esg.g.p": [
+    "A dedicated board-level ESG Committee and Risk Management Committee, established 2025, oversee disclosure, ethics and sustainable-investment standards.",
+    "2025年设立董事会层面的ESG委员会与风险管理委员会，统筹信息披露、商业道德与可持续投资标准。",
+    "2025年設立董事會層面的ESG委員會與風險管理委員會，統籌信息披露、商業道德與可持續投資標準。"
+  ],
+  "sec5.title": [
+    "Investor <em>centre</em>",
+    "投资者<em>中心</em>",
+    "投資者<em>中心</em>"
+  ],
+  "inv.p": [
+    "Persistence Gold Group is listed on the Main Board of the Hong Kong Stock Exchange under stock code <strong style=\"color: var(--gold-bright);\">2489</strong>. Announcements, circulars, financial statements and corporate-governance documents are published through HKEXnews and mirrored here.",
+    "集海黄金集团于香港联合交易所主板上市，股份代号 <strong style=\"color: var(--gold-bright);\">2489</strong>。公告、通函、财务报表及企业管治文件均通过港交所披露易发布，并在本网站同步展示。",
+    "集海黃金集團於香港聯合交易所主板上市，股份代號 <strong style=\"color: var(--gold-bright);\">2489</strong>。公告、通函、財務報表及企業管治文件均通過港交所披露易發佈，並在本網站同步展示。"
+  ],
+  "inv.l1": [
+    "Announcements &amp; Circulars",
+    "公告及通函",
+    "公告及通函"
+  ],
+  "inv.l2": [
+    "Financial Statements",
+    "财务报表",
+    "財務報表"
+  ],
+  "inv.l3": [
+    "Prospectus",
+    "招股章程",
+    "招股章程"
+  ],
+  "inv.l4": [
+    "Corporate Governance",
+    "企业管治",
+    "企業管治"
+  ],
+  "inv.l6": [
+    "HKEXnews Filings",
+    "披露易文件",
+    "披露易文件"
+  ],
+  "foot.title": [
+    "Creating <em>long-term value</em> for shareholders &amp; society.",
+    "为股东与社会创造<em>长期价值</em>。",
+    "為股東與社會創造<em>長期價值</em>。"
+  ],
+  "foot.c.h": [
+    "Contact",
+    "联系我们",
+    "聯繫我們"
+  ],
+  "foot.c.sub": [
+    "Investor &amp; media enquiries<br>Hong Kong · Yantai, Shandong",
+    "投资者及媒体查询<br>香港 · 山东烟台",
+    "投資者及媒體查詢<br>香港 · 山東煙台"
+  ],
+  "foot.s.h": [
+    "Site",
+    "网站导航",
+    "網站導航"
+  ],
+  "foot.a1": [
+    "About Us",
+    "关于我们",
+    "關於我們"
+  ],
+  "foot.a2": [
+    "Operations",
+    "矿山项目",
+    "礦山項目"
+  ],
+  "foot.a3": [
+    "Reserves &amp; Resources",
+    "储量资源",
+    "儲量資源"
+  ],
+  "foot.a4": [
+    "Investor Centre",
+    "投资者中心",
+    "投資者中心"
+  ],
+  "foot.copy": [
+    "© 2026 PERSISTENCE GOLD GROUP LTD · HKEX 2489 · ALL RIGHTS RESERVED",
+    "© 2026 集海黄金集团有限公司 · 港交所 2489 · 版权所有",
+    "© 2026 集海黃金集團有限公司 · 港交所 2489 · 版權所有"
+  ],
+  "foot.note": [
+    "DESIGN CONCEPT — NOT AN OFFICIAL COMPANY PUBLICATION",
+    "设计概念稿——非公司官方发布",
+    "設計概念稿——非公司官方發佈"
+  ],
+  "a11y.skip": [
+    "Skip to content",
+    "跳至正文",
+    "跳至正文"
+  ],
+  "nav.fin": [
+    "Financials",
+    "财务表现",
+    "財務表現"
+  ],
+  "secfin.title": [
+    "FY2025 financial <em>highlights</em>",
+    "2025财年<em>财务亮点</em>",
+    "2025財年<em>財務亮點</em>"
+  ],
+  "fin.note": [
+    "Extracted from the audited Annual Results Announcement for the year ended 31 December 2025, published March 2026. Currency: RMB. Comparatives are FY2024.",
+    "摘自截至2025年12月31日止年度之经审核全年业绩公告（2026年3月刊发）。货币单位：人民币。对比期为2024财年。",
+    "摘自截至2025年12月31日止年度之經審核全年業績公告（2026年3月刊發）。貨幣單位：人民幣。對比期為2024財年。"
+  ],
+  "fin.u.m": [
+    "RMB M",
+    "百万元",
+    "百萬元"
+  ],
+  "fin.u.cents": [
+    "RMB cents",
+    "人民币·分",
+    "人民幣·分"
+  ],
+  "fin.l1": [
+    "Revenue",
+    "营业收入",
+    "營業收入"
+  ],
+  "fin.d1": [
+    "▲ +25.9% YoY",
+    "▲ 同比 +25.9%",
+    "▲ 同比 +25.9%"
+  ],
+  "fin.l2": [
+    "Gross Margin",
+    "毛利率",
+    "毛利率"
+  ],
+  "fin.d2": [
+    "2024: 50.8%",
+    "2024年：50.8%",
+    "2024年：50.8%"
+  ],
+  "fin.l3": [
+    "Net Profit",
+    "年度净利润",
+    "年度淨利潤"
+  ],
+  "fin.d3": [
+    "▼ −1.6% YoY",
+    "▼ 同比 −1.6%",
+    "▼ 同比 −1.6%"
+  ],
+  "fin.l4": [
+    "Profit Attributable to Owners",
+    "归母净利润",
+    "歸母淨利潤"
+  ],
+  "fin.d4": [
+    "▲ +5.6% YoY",
+    "▲ 同比 +5.6%",
+    "▲ 同比 +5.6%"
+  ],
+  "fin.l5": [
+    "Basic &amp; Diluted EPS",
+    "每股基本及摊薄盈利",
+    "每股基本及攤薄盈利"
+  ],
+  "fin.d5": [
+    "▲ +1.1% YoY",
+    "▲ 同比 +1.1%",
+    "▲ 同比 +1.1%"
+  ],
+  "fin.l6": [
+    "Cash &amp; Cash Equivalents",
+    "现金及现金等价物",
+    "現金及現金等價物"
+  ],
+  "fin.d6": [
+    "▲ +70.8% vs FY2024",
+    "▲ 较2024财年 +70.8%",
+    "▲ 較2024財年 +70.8%"
+  ],
+  "fin.ct": [
+    "Revenue &amp; profit — FY2024 vs FY2025 (RMB million)",
+    "营收与利润——2024 vs 2025财年（人民币百万元）",
+    "營收與利潤——2024 vs 2025財年（人民幣百萬元）"
+  ],
+  "fin.lg24": [
+    "FY2024",
+    "2024财年",
+    "2024財年"
+  ],
+  "fin.lg25": [
+    "FY2025",
+    "2025财年",
+    "2025財年"
+  ],
+  "fin.g1": [
+    "Revenue",
+    "营业收入",
+    "營業收入"
+  ],
+  "fin.g2": [
+    "Gross Profit",
+    "毛利",
+    "毛利"
+  ],
+  "fin.g3": [
+    "Attributable Profit",
+    "归母净利润",
+    "歸母淨利潤"
+  ],
+  "spark.t": [
+    "52-Week Share Price (HKD)",
+    "52周股价走势（港元）",
+    "52周股價走勢（港元）"
+  ],
+  "gov.c1": [
+    "Audit Committee",
+    "审核委员会",
+    "審核委員會"
+  ],
+  "gov.c2": [
+    "Remuneration Committee",
+    "薪酬委员会",
+    "薪酬委員會"
+  ],
+  "gov.c3": [
+    "Nomination Committee",
+    "提名委员会",
+    "提名委員會"
+  ],
+  "gov.c4": [
+    "ESG Committee",
+    "ESG委员会",
+    "ESG委員會"
+  ],
+  "gov.c5": [
+    "Risk Management Committee",
+    "风险管理委员会",
+    "風險管理委員會"
+  ]
+};
+  const TITLES = {
+    en: "Persistence Gold — Website Redesign Concept",
+    zh: "集海黄金集团 — 网站改版概念稿",
+    hk: "集海黃金集團 — 網站改版概念稿"
   };
-  const TITLES = { en: "Persistence Gold — Website Redesign Concept", zh: "集海黄金集团 — 网站改版概念稿" };
+  const LANG_IDX = { en: 0, zh: 1, hk: 2 };
+  const LANG_ATTR = { en: "en", zh: "zh-Hans", hk: "zh-Hant" };
 
-  const langBtn = document.getElementById("langBtn");
+  const langSeg = document.getElementById("langSeg");
   let lang;
   try { lang = localStorage.getItem("pg-lang"); } catch (e) { lang = null; }
-  if (lang !== "en" && lang !== "zh") {
-    lang = (navigator.language || "").toLowerCase().startsWith("zh") ? "zh" : "en";
+  if (!(lang in LANG_IDX)) {
+    const nl = (navigator.language || "").toLowerCase();
+    lang = nl.startsWith("zh")
+      ? (/hant|tw|hk|mo/.test(nl) ? "hk" : "zh")
+      : "en";
   }
   function setLang(next) {
     lang = next;
-    const idx = lang === "zh" ? 1 : 0;
+    const idx = LANG_IDX[lang];
     document.querySelectorAll("[data-i18n]").forEach((el) => {
       const entry = I18N[el.dataset.i18n];
-      if (entry) el.innerHTML = entry[idx];
+      if (entry) el.innerHTML = entry[idx] || entry[1] || entry[0];
     });
     document.querySelectorAll("[data-href-en]").forEach((el) => {
-      el.href = lang === "zh" ? el.dataset.hrefZh : el.dataset.hrefEn;
+      el.href = lang === "hk" ? (el.dataset.hrefHk || el.dataset.hrefZh)
+        : lang === "zh" ? el.dataset.hrefZh : el.dataset.hrefEn;
     });
-    document.documentElement.lang = lang;
+    document.documentElement.lang = LANG_ATTR[lang];
     document.title = TITLES[lang];
-    langBtn.textContent = lang === "zh" ? "EN" : "中文";
+    langSeg.querySelectorAll("button").forEach((b) =>
+      b.classList.toggle("on", b.dataset.lang === lang));
     try { localStorage.setItem("pg-lang", lang); } catch (e) { /* private mode */ }
     renderAnnTabs(); renderAnns();
   }
-  langBtn.addEventListener("click", () => setLang(lang === "zh" ? "en" : "zh"));
+  langSeg.querySelectorAll("button").forEach((b) =>
+    b.addEventListener("click", () => setLang(b.dataset.lang)));
   setLang(lang);
 
   /* ================= announcements (full official list) ================= */
-  var PG_ANNS = {"en":[{"d":"2026·07","t":"VOLUNTARY ANNOUNCEMENT PLAN TO CONDUCT ON-MARKET SHARE REPURCHASE","u":"https://persistencegold.com/wp-content/uploads/2026/07/MARKET-SHARE-REPURCHASE.pdf"},{"d":"2026·07","t":"VOLUNTARY ANNOUNCEMENT ACQUISITION OF SHARES IN THE TARGET COMPANY","u":"https://persistencegold.com/wp-content/uploads/2026/07/EW02489aottc.pdf"},{"d":"2026·06","t":"LIST OF DIRECTORS AND THEIR ROLES AND FUNCTIONS 20260626","u":"https://persistencegold.com/wp-content/uploads/2026/06/LIST-OF-DIRECTORS-AND-THEIR-ROLES-AND-FUNCTIONS20260626.pdf"},{"d":"2026·06","t":"POLL RESULTS OF THE ANNUAL GENERAL MEETING HELD ON 26 JUNE 2026","u":"https://persistencegold.com/wp-content/uploads/2026/06/AGM-POLL-RESULTS-26-JUNE-2026.pdf"},{"d":"2026·05","t":"PROPOSED GRANT OF GENERAL MANDATES TO ISSUE AND REPURCHASE SHARES; PROPOSED RE-ELECTION OF DIRECTORS; AND NOTICE OF ANNUAL GENERAL MEETING 20260526","u":"https://persistencegold.com/wp-content/uploads/2026/05/PROPOSED-GRANT-NOTICE-AGM20260526.pdf"},{"d":"2026·05","t":"NOTICE OF ANNUAL GENERAL MEETING 20260526","u":"https://persistencegold.com/wp-content/uploads/2026/05/NOTICE-OF-ANNUAL-GENERAL-MEETING-20260526.pdf"},{"d":"2026·05","t":"NOTICE OF BOARD MEETING 20260508","u":"https://persistencegold.com/wp-content/uploads/2026/05/NOTICE-OF-BOARD-MEETING-20260508.pdf"},{"d":"2026·04","t":"LIST OF DIRECTORS AND THEIR ROLES AND FUNCTIONS 20260408","u":"https://persistencegold.com/wp-content/uploads/2026/04/LIST-OF-DIRECTORS-AND-THEIR-ROLES-AND-FUNCTIONS-20260408.pdf"},{"d":"2026·04","t":"RE-DESIGNATION OF DIRECTOR;CHANGE OF COMPOSITION OF AUDIT COMMITTEE, REMUNERATION COMMITTEE AND NOMINATION COMMITTEE","u":"https://persistencegold.com/wp-content/uploads/2026/04/RE-DESIGNATION-OF-DIRECTOR-20260408.pdf"},{"d":"2026·03","t":"ANNUAL RESULTS ANNOUNCEMENT FOR THE YEAR ENDED 31 DECEMBER 2025","u":"https://persistencegold.com/wp-content/uploads/2026/03/ANNUAL-RESULTS-ANNOUNCEMENT-31-DECEMBER-2025.pdf"},{"d":"2026·03","t":"INSIDE INFORMATION RESUMPTION OF PRODUCTION OF YANTAI MUJIN","u":"https://persistencegold.com/wp-content/uploads/2026/03/20260322.pdf"},{"d":"2026·03","t":"INSIDE INFORMATION RESUMPTION OF PRODUCTION OF YANTAI ZHONGJIA UNDERGROUND MINE","u":"https://persistencegold.com/wp-content/uploads/2026/03/RESUMPTIONOFPRODUCTIONOFYANTAIZHONGJIA-UNDERGROUND-MINE.pdf"},{"d":"2026·03","t":"INSIDE INFORMATION RESUMPTION OF PRODUCTION OF THE OPEN PITS OF YANTAI ZHONGJIA","u":"https://persistencegold.com/wp-content/uploads/2026/03/production_resumption.pdf"},{"d":"2026·03","t":"NOTICE OF BOARD MEETING 20260331","u":"https://persistencegold.com/wp-content/uploads/2026/03/noticeofboardmeeting31032026.pdf"},{"d":"2026·02","t":"INSIDE INFORMATION – (I) SUSPENSION OF PRODUCTION OF YANTAI ZHONGJIA AND YANTAI MUJIN; AND (II) PROGRESS ON THE USE OF THE NET PROCEEDS FROM THE PLACING","u":"https://persistencegold.com/wp-content/uploads/2026/02/INSIDEINFORMATION–ISUSPENSIONOFPRODUCTIONOFYANTAIZHONGJIAANDYANTAIMUJINANDIIPROGRESSONTHEUSEOFTHENETPROCEEDSFROMTHEPLACING.pdf"},{"d":"2026·01","t":"LIST OF DIRECTORS AND THEIR ROLES AND FUNCTIONS 20260112","u":"https://persistencegold.com/wp-content/uploads/2026/01/LIST-OF-DIRECTORS-AND-THEIR-ROLES-AND-FUNCTIONS-20260112.pdf"},{"d":"2026·01","t":"APPOINTMENT OF EXECUTIVE DIRECTOR","u":"https://persistencegold.com/wp-content/uploads/2026/01/APPOINTMENT-OF-EXECUTIVE-DIRECTOR-Chen-Zhuping20260112.pdf"},{"d":"2026·01","t":"CHANGE OF COMPANY NAME, STOCK SHORT NAME AND COMPANY WEBSITE","u":"https://persistencegold.com/wp-content/uploads/2026/01/CHANGE-OF-COMPANY-NAME-STOCK-SHORT-NAMECOMPANY-WEBSITE.pdf"},{"d":"2025·12","t":"POLL RESULTS OF THE EXTRAORDINARY GENERAL MEETING HELD ON 12 DECEMBER 2025","u":"https://persistencegold.com/wp-content/uploads/2025/12/POLL-RESULTs-of-EAGM-20251212.pdf"},{"d":"2025·11","t":"PROPOSED CHANGE OF COMPANY NAME AND NOTICE OF EXTRAORDINARY GENERAL MEETING","u":"https://persistencegold.com/wp-content/uploads/2025/11/PROPOSED_CHANGE_OF_COMPANY_NAME_AND_NOTICE_OF_EXTRAORDINARY_GENERAL_MEETING.pdf"},{"d":"2025·11","t":"NOTICE OF EXTRAORDINARY GENERAL MEETING","u":"https://persistencegold.com/wp-content/uploads/2025/11/NOTICE-OF-EXTRAORDINARY-GENERAL-MEETING-20251124.pdf"},{"d":"2025·11","t":"INSIDE INFORMATION RESUMPTION OF PRODUCTION OF SONGJIAGOU UNDERGROUND MINE","u":"https://persistencegold.com/wp-content/uploads/2025/11/INSIDE-INFORMATION-RESUMPTION-OF-PRODUCTION-UNDERGROUND-MINE.pdf"},{"d":"2025·11","t":"PROPOSED CHANGE OF COMPANY NAME","u":"https://persistencegold.com/wp-content/uploads/2025/11/PROPOSED-CHANGE-OF-COMPANY-NAME.pdf"},{"d":"2025·11","t":"LIST OF DIRECTORS AND THEIR ROLES AND FUNCTIONS 20251104","u":"https://persistencegold.com/wp-content/uploads/2025/11/LIST_OF_DIRECTORS_AND_THEIR_ROLES_AND_FUNCTIONS-20251104.pdf"},{"d":"2025·11","t":"CHANGE OF COMPANY SECRETARY AND AUTHORISED REPRESENTATIVE","u":"https://persistencegold.com/wp-content/uploads/2025/11/CHANGE_OF_COMPANY_SECRETARY_AND_AUTHORISED_REPRESENTATIVE.pdf"},{"d":"2025·11","t":"NOTICE OF BOARD MEETING 20251128","u":"https://persistencegold.com/wp-content/uploads/2025/11/NOTICE-OF-BOARD-MEETING-20251128.pdf"},{"d":"2025·10","t":"Next Day Disclosure Return (Equity issuer - changes in issued shares or treasury shares, share buybacks and/or on-market sales of treasury shares)","u":"https://persistencegold.com/wp-content/uploads/2025/10/Next-Day-Disclosure-Return-20251015.pdf"},{"d":"2025·10","t":"COMPLETION OF PLACING OF NEW SHARES UNDER THE GENERAL MANDATE","u":"https://persistencegold.com/wp-content/uploads/2025/10/COMPLETION-OF-PLACING.pdf"},{"d":"2025·10","t":"SUPPLEMENTAL ANNOUNCEMENT PLACING OF NEW SHARES UNDER GENERAL MANDATE","u":"https://persistencegold.com/wp-content/uploads/2025/10/SUPPLEMENTAL公告配售.pdf"},{"d":"2025·09","t":"INSIDE INFORMATION RESUMPTION OF PRODUCTION OF DGZ MINE","u":"https://persistencegold.com/wp-content/uploads/2025/09/RESUMPTION-OF-PRODUCTION-OF-DGZ-MINE.pdf"},{"d":"2025·09","t":"PLACING OF NEW SHARES UNDER GENERAL MANDATE","u":"https://persistencegold.com/wp-content/uploads/2025/09/PLACING-OF-NEW-SHARES-UNDER-GENERAL-MANDATE.pdf"},{"d":"2025·09","t":"INSIDE INFORMATION –SUSPENSION OF PRODUCTION OF SONGJIAGOU UNDERGROUND MINE","u":"https://persistencegold.com/wp-content/uploads/2025/09/SUSPENSION-OF-PRODUCTION-UD-MINE.pdf"},{"d":"2025·08","t":"Cash Dividend Announcement for Equity Issuer 20250829","u":"https://persistencegold.com/wp-content/uploads/2025/08/Interim-Dividend-FY-2025_EF001_CASH_DIVIDEND_20250829.pdf"},{"d":"2025·08","t":"NOTICE OF BOARD MEETING 20250813","u":"https://persistencegold.com/wp-content/uploads/2025/08/NOTICE-OF-BOARD-MEETING-20250813.pdf"},{"d":"2025·08","t":"RESIGNATION OF EXECUTIVE DIRECTOR, COMPANY SECRETARY AND AUTHORISED REPRESENTATIVE","u":"https://persistencegold.com/wp-content/uploads/2025/08/RESIGNATION-Raymond.pdf"},{"d":"2025·07","t":"INSIDE INFORMATION –SUSPENSION OF PRODUCTION OF DGZ MINE","u":"https://persistencegold.com/wp-content/uploads/2025/07/suspension-of-DGZ-mine-20250728.pdf"},{"d":"2025·07","t":"GRANT OF SHARE OPTIONS PURSUANT TO THE SHARE OPTION SCHEME","u":"https://persistencegold.com/wp-content/uploads/2025/07/GRANT-OF-SHARE-OPTIONS-PURSUANT-TO-THE-SHARE-OPTION-SCHEME.pdf"},{"d":"2025·06","t":"POLL RESULTS OF THE ANNUAL GENERAL MEETING HELD ON 26 JUNE 2025","u":"https://persistencegold.com/wp-content/uploads/2025/06/AGM·-POLL-RESULTS-26-JUNE-2025.pdf"},{"d":"2025·05","t":"NOTICE OF ANNUAL GENERAL MEETING 20250528","u":"https://persistencegold.com/wp-content/uploads/2025/05/NOTICE-OF-ANNUAL-GENERAL-MEETING-20250528.pdf"},{"d":"2025·05","t":"PROPOSED GRANT OF GENERAL MANDATES TO ISSUE AND REPURCHASE SHARES; PROPOSED RE-ELECTION OF DIRECTORS; AND NOTICE OF ANNUAL GENERAL MEETING 20250528","u":"https://persistencegold.com/wp-content/uploads/2025/05/PROPOSED-GRANT-OF-GENERAL-MANDATES-TO-ISSUE-AND-REPURCHASE-SHARES-PROPOSED-RE-ELECTION-OF-DIRECTORS-AND-NOTICE-OF-ANNUAL-GENERAL-MEETING.pdf"},{"d":"2025·05","t":"NOTICE OF BOARD MEETING 20250520","u":"https://persistencegold.com/wp-content/uploads/2025/05/Notice-of-Board-Meeting-20250520.pdf"},{"d":"2025·03","t":"ANNUAL RESULTS ANNOUNCEMENT FOR THE YEAR ENDED 31 DECEMBER 2024","u":"https://persistencegold.com/wp-content/uploads/2025/03/EW02489ARA24.pdf"},{"d":"2025·03","t":"PROFIT ALERT 20250324","u":"https://persistencegold.com/wp-content/uploads/2025/03/PROFIT-ALERT-20250324.pdf"},{"d":"2025·03","t":"NOTICE OF BOARD MEETING 20250310","u":"https://persistencegold.com/wp-content/uploads/2025/03/NOTICE-OF-BOARD-MEETING20250310.pdf"},{"d":"2025·02","t":"DISCLOSEABLE TRANSACTION COMPLETION OF ACQUISITION OF SHARES IN THE TARGET COMPANY","u":"https://persistencegold.com/wp-content/uploads/2025/02/DISCLOSEABLE-TRANSACTION-COMPLETION.pdf"},{"d":"2025·02","t":"LIST OF DIRECTORS AND THEIR ROLES AND FUNCTIONS20250206","u":"https://persistencegold.com/wp-content/uploads/2025/02/LIST-OF-DIRECTORS-AND-THEIR-ROLES-AND-FUNCTIONS20250206.pdf"},{"d":"2025·02","t":"Risk Management Committee – Terms of Reference","u":"https://persistencegold.com/wp-content/uploads/2025/02/Risk-Management-Committee-–-Terms-of-Reference.pdf"},{"d":"2025·02","t":"Environmental, Social and Governance (ESG) Committee – Terms of Reference","u":"https://persistencegold.com/wp-content/uploads/2025/02/ESGCommittee-–-ToR.pdf"},{"d":"2025·02","t":"ESTABLISHMENT OF (I) THE ENVIRONMENTAL, SOCIAL AND GOVERNANCE (ESG) COMMITTEE; AND (II) THE RISK MANAGEMENT COMMITTEE","u":"https://persistencegold.com/wp-content/uploads/2025/02/ESTABLISHMENT-ESG-COMMITTEE-ANDII-RMCOMMITTEE.pdf"},{"d":"2025·02","t":"LIST OF DIRECTORS AND THEIR ROLES AND FUNCTIONS 20250204","u":"https://persistencegold.com/wp-content/uploads/2025/02/LIST-OF-DIRECTORS-AND-THEIR-ROLES-AND-FUNCTIONS20250204.pdf"},{"d":"2025·02","t":"RESIGNATION OF EXECUTIVE DIRECTOR","u":"https://persistencegold.com/wp-content/uploads/2025/02/陈绍惠执董辞任英文.pdf"},{"d":"2025·01","t":"ANNOUNCEMENT ON THE PROGRESS OF DISCLOSEABLE TRANSACTION","u":"https://persistencegold.com/wp-content/uploads/2025/01/ANNOUNCEMENT-ON-THE-PROGRESS-OF-DISCLOSEABLE-TRANSACTION.pdf"},{"d":"2024·12","t":"SUPPLEMENTARY ANNOUNCEMENT IN RELATION TO DISCLOSEABLE TRANSACTION ACQUISITION OF SHARES IN THE TARGET COMPANY","u":"https://persistencegold.com/wp-content/uploads/2024/12/SUPPLEMENTARY-ANNOUNCEMENT.pdf"},{"d":"2024·11","t":"DISCLOSEABLE TRANSACTION ACQUISITION OF SHARES IN THE TARGET COMPANY","u":"https://persistencegold.com/wp-content/uploads/2024/11/披露交易E.pdf"},{"d":"2024·11","t":"NOTICE OF BOARD MEETING 20241111","u":"https://persistencegold.com/wp-content/uploads/2024/11/NOTICE-OF-BOARD-MEETING241111.pdf"},{"d":"2024·08","t":"Cash Dividend Announcement for Equity Issuer","u":"https://persistencegold.com/wp-content/uploads/2024/08/Cash-Dividend-Announcement-for-Equity-Issuer240830.pdf"},{"d":"2024·08","t":"PROFIT ALERT","u":"https://persistencegold.com/wp-content/uploads/2024/08/盈利预告英23082024.pdf"},{"d":"2024·08","t":"CHANGE IN USE OF THE NET PROCEEDS FROM GLOBAL OFFERING","u":"https://persistencegold.com/wp-content/uploads/2024/08/uop用途变更英文.pdf"},{"d":"2024·08","t":"NOTICE OF BOARD MEETING","u":"https://persistencegold.com/wp-content/uploads/2024/08/NOTICE-OF-BOARD-MEETING.pdf"},{"d":"2024·06","t":"(I) POLL RESULTS OF THE ANNUAL GENERAL MEETING HELD ON 26 JUNE 2024; AND (II) CHANGE OF MEMBER OF THE BOARD","u":"https://persistencegold.com/wp-content/uploads/2024/06/pollresults062624.pdf"},{"d":"2024·06","t":"LIST OF DIRECTORS AND THEIR ROLES AND FUNCTIONS","u":"https://persistencegold.com/wp-content/uploads/2024/06/LIST-OF-DIRECTORS-AND-THEIR-ROLES-AND-FUNCTIONS.pdf"},{"d":"2024·05","t":"PROPOSED GRANT OF GENERAL MANDATES TO ISSUE AND REPURCHASE SHARES;PROPOSED APPOINTMENT OF NON-EXECUTIVE DIRECTOR;PROPOSED RE-ELECTION OF DIRECTORS;AND NOTICE OF ANNUAL GENERAL MEETING","u":"https://persistencegold.com/wp-content/uploads/2024/05/PROPOSED-GRANT-OF-GENERAL-MANDATES-TO.pdf"},{"d":"2024·05","t":"NOTICE OF ANNUAL GENERAL MEETING","u":"https://persistencegold.com/wp-content/uploads/2024/05/NOTICE-OF-ANNUAL-GENERAL-MEETING.pdf"},{"d":"2024·05","t":"PROPOSED APPOINTMENT OF NON-EXECUTIVE DIRECTOR","u":"https://persistencegold.com/wp-content/uploads/2024/05/PROPOSED-APPOINTMENT-OF-NON-EXECUTIVE-DIRECTOR.pdf"},{"d":"2024·05","t":"FORM OF PROXY FOR ANNUAL GENERAL MEETING","u":"https://persistencegold.com/wp-content/uploads/2024/05/FORM-OF-PROXY-FOR-ANNUAL-GENERAL-MEETING.pdf"},{"d":"2024·04","t":"ANNUAL RESULTS ANNOUNCEMENT FOR THE YEAR ENDED 31 DECEMBER 2023","u":"https://persistencegold.com/wp-content/uploads/2024/04/P1c259ecf16b94bf0a98b77ba597f81c5.pdf"},{"d":"2024·04","t":"VOLUNTARY ANNOUNCEMENT (I) LETTER OF INTENT IN RELATION TO A POSSIBLE ACQUISITION; AND (II) DELAY IN THE EXPECTED TIMELINE FOR UTILIZING THE NET PROCEEDS FROM GLOBAL OFFERING","u":"https://persistencegold.com/wp-content/uploads/2024/04/Pff506545910548d19c6239a4ee57191b.pdf"},{"d":"2024·03","t":"END OF STABILISATION PERIOD, NO STABILISING ACTION AND LAPSE OF THE OVER-ALLOTMENT OPTION","u":"https://persistencegold.com/wp-content/uploads/2024/03/P4336282d1f3843aba9dfbf6454cedf82.pdf"},{"d":"2024·03","t":"ANNOUNCEMENT OF FINAL OFFER PRICE AND ALLOTMENT RESULTS","u":"https://persistencegold.com/wp-content/uploads/2024/03/Peecaaa429e3b4bdd85a3935db415d9d3.pdf"},{"d":"2024·03","t":"Formal Notice-20231214","u":"https://persistencegold.com/wp-content/uploads/2024/03/P2804dcaad0274d08be1aba22374a84ce.pdf"}],"zh":[{"d":"2026·07","t":"自愿性公告—计划进行市场内股份购回","u":"https://persistencegold.com/wp-content/uploads/2026/07/自願性公告收購目標公司股份.pdf"},{"d":"2026·07","t":"自愿性公告 收购目标公司股份","u":"https://persistencegold.com/wp-content/uploads/2026/07/自願性公告收購目標公司股份.pdf"},{"d":"2026·06","t":"董事名单及其角色和职能 20260626","u":"https://persistencegold.com/wp-content/uploads/2026/06/董事名單及其角色和職能-20260626.pdf"},{"d":"2026·06","t":"于2026年6月26日举行之股东周年大会投票表决结果","u":"https://persistencegold.com/wp-content/uploads/2026/06/於2026年6月26日舉行之股東週年大會投票表決結果.pdf"},{"d":"2026·05","t":"建议授出发行及购回股份之一般授权；建议重选董事；及股东週年大会通告 20260526","u":"https://persistencegold.com/wp-content/uploads/2026/05/建議授出發行及購回股份之一般授權；建議重選董事；及股東週年大會通告-20260526.pdf"},{"d":"2026·05","t":"股东周年大会通告 20260526","u":"https://persistencegold.com/wp-content/uploads/2026/05/股東週年大會通告-20260526.pdf"},{"d":"2026·05","t":"董事会会议通告 20260508","u":"https://persistencegold.com/wp-content/uploads/2026/05/董事會會議通告20260508.pdf"},{"d":"2026·04","t":"董事名单及其角色和职能 20260408","u":"https://persistencegold.com/wp-content/uploads/2026/04/董事名單及其角色和職能-20260408.pdf"},{"d":"2026·04","t":"调任董事；审核委员会、薪酬委员会及提名委员会组成变动","u":"https://persistencegold.com/wp-content/uploads/2026/04/調任董事；審核委員會、薪酬委員會及提名委員會組成變動.pdf"},{"d":"2026·03","t":"年度业绩公告-截至2025年12月31日止年度","u":"https://persistencegold.com/wp-content/uploads/2026/03/年度業績公告—截至2025年12月31日止年度.pdf"},{"d":"2026·03","t":"内幕消息-烟台牟金恢复生产","u":"https://persistencegold.com/wp-content/uploads/2026/03/內幕消息-煙台牟金恢復生產.pdf"},{"d":"2026·03","t":"内幕消息-烟台中嘉地下矿场恢复生产","u":"https://persistencegold.com/wp-content/uploads/2026/03/內幕消息煙台中嘉地下礦場恢復生產.pdf"},{"d":"2026·03","t":"内幕消息-烟台中嘉露天矿恢复生产","u":"https://persistencegold.com/wp-content/uploads/2026/03/煙台中嘉露天礦場恢復生產.pdf"},{"d":"2026·03","t":"董事会会议通告 20260331","u":"https://persistencegold.com/wp-content/uploads/2026/03/董事会会议通告-20260331.pdf"},{"d":"2026·02","t":"内幕消息-(I)烟台中嘉及烟台牟金暂停生产; 及(II)配售事项所得款项净额用途的进展","u":"https://persistencegold.com/wp-content/uploads/2026/02/內幕消息I煙台中嘉及煙台牟金暫停生產；及II配售事項所得款項淨額用途的進展.pdf"},{"d":"2026·01","t":"董事名单及其角色和职能","u":"https://persistencegold.com/wp-content/uploads/2026/01/董事名單及其角色和職能20260112.pdf"},{"d":"2026·01","t":"委任执行董事","u":"https://persistencegold.com/wp-content/uploads/2026/01/委任執行董事-陈祝平20260112.pdf"},{"d":"2026·01","t":"更改公司名称、股份简称及公司网站","u":"https://persistencegold.com/wp-content/uploads/2026/01/更改公司名稱、股份簡稱及公司網站.pdf"},{"d":"2025·12","t":"于2025年12月12日举行之股东特别大会投票表决结果","u":"https://persistencegold.com/wp-content/uploads/2025/12/於2025年12月12日舉行之股東特別大會投票表決結果.pdf"},{"d":"2025·11","t":"建议更改公司名称及股东特别大会通告","u":"https://persistencegold.com/wp-content/uploads/2025/11/建議更改公司名稱及股東特別大會通告20251124.pdf"},{"d":"2025·11","t":"股东特别大会通告","u":"https://persistencegold.com/wp-content/uploads/2025/11/股東特別大會通告-20251124.pdf"},{"d":"2025·11","t":"内幕消息-宋家沟地下矿恢复生产","u":"https://persistencegold.com/wp-content/uploads/2025/11/內幕消息——宋家溝地下礦恢復生產.pdf"},{"d":"2025·11","t":"建议更改公司名称","u":"https://persistencegold.com/wp-content/uploads/2025/11/建議更改公司名稱.pdf"},{"d":"2025·11","t":"董事名单及其角色和职能 20251104","u":"https://persistencegold.com/wp-content/uploads/2025/11/董事名單及其角色和職能-20251104.pdf"},{"d":"2025·11","t":"公司秘书及授权代表变更","u":"https://persistencegold.com/wp-content/uploads/2025/11/公司秘書及授權代表變更.pdf"},{"d":"2025·11","t":"董事会会议通告 20251128","u":"https://persistencegold.com/wp-content/uploads/2025/11/董事會會議通告-20251128.pdf"},{"d":"2025·10","t":"翌日披露报表 (股份发行人 ── 已发行股份或库存股份变动、股份购回及/或在场内出售库存股份)","u":"https://persistencegold.com/wp-content/uploads/2025/10/翌日披露報表20251015.pdf"},{"d":"2025·10","t":"完成根据一般授权配售新股份","u":"https://persistencegold.com/wp-content/uploads/2025/10/完成根據一般授權配售新股份.pdf"},{"d":"2025·10","t":"补充公告 根据一般授权配售新股份","u":"https://persistencegold.com/wp-content/uploads/2025/10/补充公告-根据一般授权配售新股.pdf"},{"d":"2025·09","t":"内幕消息-邓格庄矿恢复生产","u":"https://persistencegold.com/wp-content/uploads/2025/09/鄧格莊礦恢復生產.pdf"},{"d":"2025·09","t":"根据一般授权配售新股份","u":"https://persistencegold.com/wp-content/uploads/2025/09/根據一般授權配售新股份.pdf"},{"d":"2025·09","t":"内幕消息-宋家沟地下矿山暂停生产","u":"https://persistencegold.com/wp-content/uploads/2025/09/宋家沟地下矿山暂停生产.pdf"},{"d":"2025·08","t":"股票发行人现金股息公告20250829","u":"https://persistencegold.com/wp-content/uploads/2025/08/股票发行人现金股息公告-20250829.pdf"},{"d":"2025·08","t":"董事会会议通告 20250813","u":"https://persistencegold.com/wp-content/uploads/2025/08/董事會會議通告20250813.pdf"},{"d":"2025·08","t":"执行董事、公司秘书及授权代表辞任","u":"https://persistencegold.com/wp-content/uploads/2025/08/執-行-董-事、公-司-秘-書-及-授-權-代-表-辭-任.pdf"},{"d":"2025·07","t":"内幕消息-邓格庄矿暂停生产","u":"https://persistencegold.com/wp-content/uploads/2025/07/邓格庄停产20250728.pdf"},{"d":"2025·07","t":"根据购股权计划授出购股权","u":"https://persistencegold.com/wp-content/uploads/2025/07/根據購股權計劃授出購股權.pdf"},{"d":"2025·06","t":"于2025年6月26日举行之股东周年大会投票表决结果","u":"https://persistencegold.com/wp-content/uploads/2025/06/於2025年6月26日舉行之股東週年大會投票表決結果.pdf"},{"d":"2025·05","t":"股东周年大会通告 20250528","u":"https://persistencegold.com/wp-content/uploads/2025/05/股東週年大會通告-20250528.pdf"},{"d":"2025·05","t":"建议授出发行及购回股份之一般授权；建议委任非执行董事；建议重选董事；及股东週年大会通告 20250528","u":"https://persistencegold.com/wp-content/uploads/2025/05/建議授出發行及購回股份之一般授權；建議重選董事；及股東週年大會通告.pdf"},{"d":"2025·05","t":"董事会会议通告 20250520","u":"https://persistencegold.com/wp-content/uploads/2025/05/董事会会议通告20250520.pdf"},{"d":"2025·03","t":"年度业绩公告-截至2024年12月31日止年度","u":"https://persistencegold.com/wp-content/uploads/2025/03/年度業績公告截至2024年12月31日止年度.pdf"},{"d":"2025·03","t":"盈利预告 20250324","u":"https://persistencegold.com/wp-content/uploads/2025/03/盈利預告-20250324.pdf"},{"d":"2025·03","t":"董事会会议通告 20250310","u":"https://persistencegold.com/wp-content/uploads/2025/03/董事会会议通告20250310.pdf"},{"d":"2025·02","t":"须予披露交易完成收购目标公司之股份","u":"https://persistencegold.com/wp-content/uploads/2025/02/須予披露交易完成收購目標公司之股份.pdf"},{"d":"2025·02","t":"董事名单及其角色和职能 20250206","u":"https://persistencegold.com/wp-content/uploads/2025/02/董事名單及其角色和職能20250206.pdf"},{"d":"2025·02","t":"风险管理委员会-职权范围","u":"https://persistencegold.com/wp-content/uploads/2025/02/風-險-管-理-委-員-會－職-權-範-圍.pdf"},{"d":"2025·02","t":"环境、社会及管治（ESG）委员会—职权范围","u":"https://persistencegold.com/wp-content/uploads/2025/02/環-境、社-會-及-管-治ESG委-員-會－職-權-範-圍.pdf"},{"d":"2025·02","t":"成立（I）环境、社会及管治（ESG）委员会；及（II）风险管理委员会","u":"https://persistencegold.com/wp-content/uploads/2025/02/成立I環-境、社會及管治ESG委員會；及II風險管理委員會.pdf"},{"d":"2025·02","t":"董事名单及其角色和职能","u":"https://persistencegold.com/wp-content/uploads/2025/02/董事名单20250204.pdf"},{"d":"2025·02","t":"执行董事辞任","u":"https://persistencegold.com/wp-content/uploads/2025/02/陈绍惠执董辞任.pdf"},{"d":"2025·01","t":"关于须予披露交易进展的公告","u":"https://persistencegold.com/wp-content/uploads/2025/01/關於須予披露交易進展的公告20250113.pdf"},{"d":"2024·12","t":"有关收购目标公司股份之须予披露交易之补充公告","u":"https://persistencegold.com/wp-content/uploads/2024/12/有關收購目標公司股份之須予披露交易之補充公告.pdf"},{"d":"2024·11","t":"须予披露交易收购目标公司之股份","u":"https://persistencegold.com/wp-content/uploads/2024/11/须予披露的交易.pdf"},{"d":"2024·11","t":"董事会会议通告 20241111","u":"https://persistencegold.com/wp-content/uploads/2024/11/董事會會議通告241111.pdf"},{"d":"2024·08","t":"股票发行人现金股息公告20240830","u":"https://persistencegold.com/wp-content/uploads/2024/08/股票發行人現金股息公告240830.pdf"},{"d":"2024·08","t":"盈利预告","u":"https://persistencegold.com/wp-content/uploads/2024/08/盈利预告23082024.pdf"},{"d":"2024·08","t":"变更全球发售所得款项净额的用途","u":"https://persistencegold.com/wp-content/uploads/2024/08/UOP用途变更.pdf"},{"d":"2024·08","t":"董事会会议通告","u":"https://persistencegold.com/wp-content/uploads/2024/08/董事會會議通告.pdf"},{"d":"2024·06","t":"(I)于2024年6月26日举行之股东周年大会投票表决结果；及(II)董事会成员变更","u":"https://persistencegold.com/wp-content/uploads/2024/06/I於2024年6月26日舉行之股東週年大會投票表決结果；及II董事會成員變更.pdf"},{"d":"2024·06","t":"董事名单及其角色和职能","u":"https://persistencegold.com/wp-content/uploads/2024/06/董事名單及其角色和職能.pdf"},{"d":"2024·05","t":"建议授出发行及购回股份之一般授权；建议委任非执行董事；建议重选董事；及股东週年大会通告","u":"https://persistencegold.com/wp-content/uploads/2024/05/建議授出發行及購回股份之一般授權；建議委任非執行董事；建議重選董事；及股東週年大會通告.pdf"},{"d":"2024·05","t":"股东周年大会通告","u":"https://persistencegold.com/wp-content/uploads/2024/05/股東週年大會通告.pdf"},{"d":"2024·05","t":"建议委任非执行董事","u":"https://persistencegold.com/wp-content/uploads/2024/05/建議委任非執行董事.pdf"},{"d":"2024·05","t":"股东周年大会适用之代表委任表格","u":"https://persistencegold.com/wp-content/uploads/2024/05/股東週年大會適用之代表委任表格.pdf"},{"d":"2024·04","t":"年度业绩公告-截至2023年12月31日止年度","u":"https://persistencegold.com/wp-content/uploads/2024/04/P1c259ecf16b94bf0a98b77ba597f81c5.pdf"},{"d":"2024·03","t":"稳定价格期结束、无稳定价格行动及超额配股权失效公告","u":"https://persistencegold.com/wp-content/uploads/2024/03/P4336282d1f3843aba9dfbf6454cedf82.pdf"},{"d":"2024·03","t":"最终发售价及配发公告","u":"https://persistencegold.com/wp-content/uploads/2024/03/Peecaaa429e3b4bdd85a3935db415d9d3.pdf"},{"d":"2024·03","t":"公告","u":"https://persistencegold.com/wp-content/uploads/2024/03/P2804dcaad0274d08be1aba22374a84ce.pdf"}]};
+  var PG_ANNS = {"en":[{"d":"2026·07","t":"VOLUNTARY ANNOUNCEMENT PLAN TO CONDUCT ON-MARKET SHARE REPURCHASE","u":"https://persistencegold.com/wp-content/uploads/2026/07/MARKET-SHARE-REPURCHASE.pdf"},{"d":"2026·07","t":"VOLUNTARY ANNOUNCEMENT ACQUISITION OF SHARES IN THE TARGET COMPANY","u":"https://persistencegold.com/wp-content/uploads/2026/07/EW02489aottc.pdf"},{"d":"2026·06","t":"LIST OF DIRECTORS AND THEIR ROLES AND FUNCTIONS 20260626","u":"https://persistencegold.com/wp-content/uploads/2026/06/LIST-OF-DIRECTORS-AND-THEIR-ROLES-AND-FUNCTIONS20260626.pdf"},{"d":"2026·06","t":"POLL RESULTS OF THE ANNUAL GENERAL MEETING HELD ON 26 JUNE 2026","u":"https://persistencegold.com/wp-content/uploads/2026/06/AGM-POLL-RESULTS-26-JUNE-2026.pdf"},{"d":"2026·05","t":"PROPOSED GRANT OF GENERAL MANDATES TO ISSUE AND REPURCHASE SHARES; PROPOSED RE-ELECTION OF DIRECTORS; AND NOTICE OF ANNUAL GENERAL MEETING 20260526","u":"https://persistencegold.com/wp-content/uploads/2026/05/PROPOSED-GRANT-NOTICE-AGM20260526.pdf"},{"d":"2026·05","t":"NOTICE OF ANNUAL GENERAL MEETING 20260526","u":"https://persistencegold.com/wp-content/uploads/2026/05/NOTICE-OF-ANNUAL-GENERAL-MEETING-20260526.pdf"},{"d":"2026·05","t":"NOTICE OF BOARD MEETING 20260508","u":"https://persistencegold.com/wp-content/uploads/2026/05/NOTICE-OF-BOARD-MEETING-20260508.pdf"},{"d":"2026·04","t":"LIST OF DIRECTORS AND THEIR ROLES AND FUNCTIONS 20260408","u":"https://persistencegold.com/wp-content/uploads/2026/04/LIST-OF-DIRECTORS-AND-THEIR-ROLES-AND-FUNCTIONS-20260408.pdf"},{"d":"2026·04","t":"RE-DESIGNATION OF DIRECTOR;CHANGE OF COMPOSITION OF AUDIT COMMITTEE, REMUNERATION COMMITTEE AND NOMINATION COMMITTEE","u":"https://persistencegold.com/wp-content/uploads/2026/04/RE-DESIGNATION-OF-DIRECTOR-20260408.pdf"},{"d":"2026·03","t":"ANNUAL RESULTS ANNOUNCEMENT FOR THE YEAR ENDED 31 DECEMBER 2025","u":"https://persistencegold.com/wp-content/uploads/2026/03/ANNUAL-RESULTS-ANNOUNCEMENT-31-DECEMBER-2025.pdf"},{"d":"2026·03","t":"INSIDE INFORMATION RESUMPTION OF PRODUCTION OF YANTAI MUJIN","u":"https://persistencegold.com/wp-content/uploads/2026/03/20260322.pdf"},{"d":"2026·03","t":"INSIDE INFORMATION RESUMPTION OF PRODUCTION OF YANTAI ZHONGJIA UNDERGROUND MINE","u":"https://persistencegold.com/wp-content/uploads/2026/03/RESUMPTIONOFPRODUCTIONOFYANTAIZHONGJIA-UNDERGROUND-MINE.pdf"},{"d":"2026·03","t":"INSIDE INFORMATION RESUMPTION OF PRODUCTION OF THE OPEN PITS OF YANTAI ZHONGJIA","u":"https://persistencegold.com/wp-content/uploads/2026/03/production_resumption.pdf"},{"d":"2026·03","t":"NOTICE OF BOARD MEETING 20260331","u":"https://persistencegold.com/wp-content/uploads/2026/03/noticeofboardmeeting31032026.pdf"},{"d":"2026·02","t":"INSIDE INFORMATION – (I) SUSPENSION OF PRODUCTION OF YANTAI ZHONGJIA AND YANTAI MUJIN; AND (II) PROGRESS ON THE USE OF THE NET PROCEEDS FROM THE PLACING","u":"https://persistencegold.com/wp-content/uploads/2026/02/INSIDEINFORMATION–ISUSPENSIONOFPRODUCTIONOFYANTAIZHONGJIAANDYANTAIMUJINANDIIPROGRESSONTHEUSEOFTHENETPROCEEDSFROMTHEPLACING.pdf"},{"d":"2026·01","t":"LIST OF DIRECTORS AND THEIR ROLES AND FUNCTIONS 20260112","u":"https://persistencegold.com/wp-content/uploads/2026/01/LIST-OF-DIRECTORS-AND-THEIR-ROLES-AND-FUNCTIONS-20260112.pdf"},{"d":"2026·01","t":"APPOINTMENT OF EXECUTIVE DIRECTOR","u":"https://persistencegold.com/wp-content/uploads/2026/01/APPOINTMENT-OF-EXECUTIVE-DIRECTOR-Chen-Zhuping20260112.pdf"},{"d":"2026·01","t":"CHANGE OF COMPANY NAME, STOCK SHORT NAME AND COMPANY WEBSITE","u":"https://persistencegold.com/wp-content/uploads/2026/01/CHANGE-OF-COMPANY-NAME-STOCK-SHORT-NAMECOMPANY-WEBSITE.pdf"},{"d":"2025·12","t":"POLL RESULTS OF THE EXTRAORDINARY GENERAL MEETING HELD ON 12 DECEMBER 2025","u":"https://persistencegold.com/wp-content/uploads/2025/12/POLL-RESULTs-of-EAGM-20251212.pdf"},{"d":"2025·11","t":"PROPOSED CHANGE OF COMPANY NAME AND NOTICE OF EXTRAORDINARY GENERAL MEETING","u":"https://persistencegold.com/wp-content/uploads/2025/11/PROPOSED_CHANGE_OF_COMPANY_NAME_AND_NOTICE_OF_EXTRAORDINARY_GENERAL_MEETING.pdf"},{"d":"2025·11","t":"NOTICE OF EXTRAORDINARY GENERAL MEETING","u":"https://persistencegold.com/wp-content/uploads/2025/11/NOTICE-OF-EXTRAORDINARY-GENERAL-MEETING-20251124.pdf"},{"d":"2025·11","t":"INSIDE INFORMATION RESUMPTION OF PRODUCTION OF SONGJIAGOU UNDERGROUND MINE","u":"https://persistencegold.com/wp-content/uploads/2025/11/INSIDE-INFORMATION-RESUMPTION-OF-PRODUCTION-UNDERGROUND-MINE.pdf"},{"d":"2025·11","t":"PROPOSED CHANGE OF COMPANY NAME","u":"https://persistencegold.com/wp-content/uploads/2025/11/PROPOSED-CHANGE-OF-COMPANY-NAME.pdf"},{"d":"2025·11","t":"LIST OF DIRECTORS AND THEIR ROLES AND FUNCTIONS 20251104","u":"https://persistencegold.com/wp-content/uploads/2025/11/LIST_OF_DIRECTORS_AND_THEIR_ROLES_AND_FUNCTIONS-20251104.pdf"},{"d":"2025·11","t":"CHANGE OF COMPANY SECRETARY AND AUTHORISED REPRESENTATIVE","u":"https://persistencegold.com/wp-content/uploads/2025/11/CHANGE_OF_COMPANY_SECRETARY_AND_AUTHORISED_REPRESENTATIVE.pdf"},{"d":"2025·11","t":"NOTICE OF BOARD MEETING 20251128","u":"https://persistencegold.com/wp-content/uploads/2025/11/NOTICE-OF-BOARD-MEETING-20251128.pdf"},{"d":"2025·10","t":"Next Day Disclosure Return (Equity issuer - changes in issued shares or treasury shares, share buybacks and/or on-market sales of treasury shares)","u":"https://persistencegold.com/wp-content/uploads/2025/10/Next-Day-Disclosure-Return-20251015.pdf"},{"d":"2025·10","t":"COMPLETION OF PLACING OF NEW SHARES UNDER THE GENERAL MANDATE","u":"https://persistencegold.com/wp-content/uploads/2025/10/COMPLETION-OF-PLACING.pdf"},{"d":"2025·10","t":"SUPPLEMENTAL ANNOUNCEMENT PLACING OF NEW SHARES UNDER GENERAL MANDATE","u":"https://persistencegold.com/wp-content/uploads/2025/10/SUPPLEMENTAL公告配售.pdf"},{"d":"2025·09","t":"INSIDE INFORMATION RESUMPTION OF PRODUCTION OF DGZ MINE","u":"https://persistencegold.com/wp-content/uploads/2025/09/RESUMPTION-OF-PRODUCTION-OF-DGZ-MINE.pdf"},{"d":"2025·09","t":"PLACING OF NEW SHARES UNDER GENERAL MANDATE","u":"https://persistencegold.com/wp-content/uploads/2025/09/PLACING-OF-NEW-SHARES-UNDER-GENERAL-MANDATE.pdf"},{"d":"2025·09","t":"INSIDE INFORMATION –SUSPENSION OF PRODUCTION OF SONGJIAGOU UNDERGROUND MINE","u":"https://persistencegold.com/wp-content/uploads/2025/09/SUSPENSION-OF-PRODUCTION-UD-MINE.pdf"},{"d":"2025·08","t":"Cash Dividend Announcement for Equity Issuer 20250829","u":"https://persistencegold.com/wp-content/uploads/2025/08/Interim-Dividend-FY-2025_EF001_CASH_DIVIDEND_20250829.pdf"},{"d":"2025·08","t":"NOTICE OF BOARD MEETING 20250813","u":"https://persistencegold.com/wp-content/uploads/2025/08/NOTICE-OF-BOARD-MEETING-20250813.pdf"},{"d":"2025·08","t":"RESIGNATION OF EXECUTIVE DIRECTOR, COMPANY SECRETARY AND AUTHORISED REPRESENTATIVE","u":"https://persistencegold.com/wp-content/uploads/2025/08/RESIGNATION-Raymond.pdf"},{"d":"2025·07","t":"INSIDE INFORMATION –SUSPENSION OF PRODUCTION OF DGZ MINE","u":"https://persistencegold.com/wp-content/uploads/2025/07/suspension-of-DGZ-mine-20250728.pdf"},{"d":"2025·07","t":"GRANT OF SHARE OPTIONS PURSUANT TO THE SHARE OPTION SCHEME","u":"https://persistencegold.com/wp-content/uploads/2025/07/GRANT-OF-SHARE-OPTIONS-PURSUANT-TO-THE-SHARE-OPTION-SCHEME.pdf"},{"d":"2025·06","t":"POLL RESULTS OF THE ANNUAL GENERAL MEETING HELD ON 26 JUNE 2025","u":"https://persistencegold.com/wp-content/uploads/2025/06/AGM·-POLL-RESULTS-26-JUNE-2025.pdf"},{"d":"2025·05","t":"NOTICE OF ANNUAL GENERAL MEETING 20250528","u":"https://persistencegold.com/wp-content/uploads/2025/05/NOTICE-OF-ANNUAL-GENERAL-MEETING-20250528.pdf"},{"d":"2025·05","t":"PROPOSED GRANT OF GENERAL MANDATES TO ISSUE AND REPURCHASE SHARES; PROPOSED RE-ELECTION OF DIRECTORS; AND NOTICE OF ANNUAL GENERAL MEETING 20250528","u":"https://persistencegold.com/wp-content/uploads/2025/05/PROPOSED-GRANT-OF-GENERAL-MANDATES-TO-ISSUE-AND-REPURCHASE-SHARES-PROPOSED-RE-ELECTION-OF-DIRECTORS-AND-NOTICE-OF-ANNUAL-GENERAL-MEETING.pdf"},{"d":"2025·05","t":"NOTICE OF BOARD MEETING 20250520","u":"https://persistencegold.com/wp-content/uploads/2025/05/Notice-of-Board-Meeting-20250520.pdf"},{"d":"2025·03","t":"ANNUAL RESULTS ANNOUNCEMENT FOR THE YEAR ENDED 31 DECEMBER 2024","u":"https://persistencegold.com/wp-content/uploads/2025/03/EW02489ARA24.pdf"},{"d":"2025·03","t":"PROFIT ALERT 20250324","u":"https://persistencegold.com/wp-content/uploads/2025/03/PROFIT-ALERT-20250324.pdf"},{"d":"2025·03","t":"NOTICE OF BOARD MEETING 20250310","u":"https://persistencegold.com/wp-content/uploads/2025/03/NOTICE-OF-BOARD-MEETING20250310.pdf"},{"d":"2025·02","t":"DISCLOSEABLE TRANSACTION COMPLETION OF ACQUISITION OF SHARES IN THE TARGET COMPANY","u":"https://persistencegold.com/wp-content/uploads/2025/02/DISCLOSEABLE-TRANSACTION-COMPLETION.pdf"},{"d":"2025·02","t":"LIST OF DIRECTORS AND THEIR ROLES AND FUNCTIONS20250206","u":"https://persistencegold.com/wp-content/uploads/2025/02/LIST-OF-DIRECTORS-AND-THEIR-ROLES-AND-FUNCTIONS20250206.pdf"},{"d":"2025·02","t":"Risk Management Committee – Terms of Reference","u":"https://persistencegold.com/wp-content/uploads/2025/02/Risk-Management-Committee-–-Terms-of-Reference.pdf"},{"d":"2025·02","t":"Environmental, Social and Governance (ESG) Committee – Terms of Reference","u":"https://persistencegold.com/wp-content/uploads/2025/02/ESGCommittee-–-ToR.pdf"},{"d":"2025·02","t":"ESTABLISHMENT OF (I) THE ENVIRONMENTAL, SOCIAL AND GOVERNANCE (ESG) COMMITTEE; AND (II) THE RISK MANAGEMENT COMMITTEE","u":"https://persistencegold.com/wp-content/uploads/2025/02/ESTABLISHMENT-ESG-COMMITTEE-ANDII-RMCOMMITTEE.pdf"},{"d":"2025·02","t":"LIST OF DIRECTORS AND THEIR ROLES AND FUNCTIONS 20250204","u":"https://persistencegold.com/wp-content/uploads/2025/02/LIST-OF-DIRECTORS-AND-THEIR-ROLES-AND-FUNCTIONS20250204.pdf"},{"d":"2025·02","t":"RESIGNATION OF EXECUTIVE DIRECTOR","u":"https://persistencegold.com/wp-content/uploads/2025/02/陈绍惠执董辞任英文.pdf"},{"d":"2025·01","t":"ANNOUNCEMENT ON THE PROGRESS OF DISCLOSEABLE TRANSACTION","u":"https://persistencegold.com/wp-content/uploads/2025/01/ANNOUNCEMENT-ON-THE-PROGRESS-OF-DISCLOSEABLE-TRANSACTION.pdf"},{"d":"2024·12","t":"SUPPLEMENTARY ANNOUNCEMENT IN RELATION TO DISCLOSEABLE TRANSACTION ACQUISITION OF SHARES IN THE TARGET COMPANY","u":"https://persistencegold.com/wp-content/uploads/2024/12/SUPPLEMENTARY-ANNOUNCEMENT.pdf"},{"d":"2024·11","t":"DISCLOSEABLE TRANSACTION ACQUISITION OF SHARES IN THE TARGET COMPANY","u":"https://persistencegold.com/wp-content/uploads/2024/11/披露交易E.pdf"},{"d":"2024·11","t":"NOTICE OF BOARD MEETING 20241111","u":"https://persistencegold.com/wp-content/uploads/2024/11/NOTICE-OF-BOARD-MEETING241111.pdf"},{"d":"2024·08","t":"Cash Dividend Announcement for Equity Issuer","u":"https://persistencegold.com/wp-content/uploads/2024/08/Cash-Dividend-Announcement-for-Equity-Issuer240830.pdf"},{"d":"2024·08","t":"PROFIT ALERT","u":"https://persistencegold.com/wp-content/uploads/2024/08/盈利预告英23082024.pdf"},{"d":"2024·08","t":"CHANGE IN USE OF THE NET PROCEEDS FROM GLOBAL OFFERING","u":"https://persistencegold.com/wp-content/uploads/2024/08/uop用途变更英文.pdf"},{"d":"2024·08","t":"NOTICE OF BOARD MEETING","u":"https://persistencegold.com/wp-content/uploads/2024/08/NOTICE-OF-BOARD-MEETING.pdf"},{"d":"2024·06","t":"(I) POLL RESULTS OF THE ANNUAL GENERAL MEETING HELD ON 26 JUNE 2024; AND (II) CHANGE OF MEMBER OF THE BOARD","u":"https://persistencegold.com/wp-content/uploads/2024/06/pollresults062624.pdf"},{"d":"2024·06","t":"LIST OF DIRECTORS AND THEIR ROLES AND FUNCTIONS","u":"https://persistencegold.com/wp-content/uploads/2024/06/LIST-OF-DIRECTORS-AND-THEIR-ROLES-AND-FUNCTIONS.pdf"},{"d":"2024·05","t":"PROPOSED GRANT OF GENERAL MANDATES TO ISSUE AND REPURCHASE SHARES;PROPOSED APPOINTMENT OF NON-EXECUTIVE DIRECTOR;PROPOSED RE-ELECTION OF DIRECTORS;AND NOTICE OF ANNUAL GENERAL MEETING","u":"https://persistencegold.com/wp-content/uploads/2024/05/PROPOSED-GRANT-OF-GENERAL-MANDATES-TO.pdf"},{"d":"2024·05","t":"NOTICE OF ANNUAL GENERAL MEETING","u":"https://persistencegold.com/wp-content/uploads/2024/05/NOTICE-OF-ANNUAL-GENERAL-MEETING.pdf"},{"d":"2024·05","t":"PROPOSED APPOINTMENT OF NON-EXECUTIVE DIRECTOR","u":"https://persistencegold.com/wp-content/uploads/2024/05/PROPOSED-APPOINTMENT-OF-NON-EXECUTIVE-DIRECTOR.pdf"},{"d":"2024·05","t":"FORM OF PROXY FOR ANNUAL GENERAL MEETING","u":"https://persistencegold.com/wp-content/uploads/2024/05/FORM-OF-PROXY-FOR-ANNUAL-GENERAL-MEETING.pdf"},{"d":"2024·04","t":"ANNUAL RESULTS ANNOUNCEMENT FOR THE YEAR ENDED 31 DECEMBER 2023","u":"https://persistencegold.com/wp-content/uploads/2024/04/P1c259ecf16b94bf0a98b77ba597f81c5.pdf"},{"d":"2024·04","t":"VOLUNTARY ANNOUNCEMENT (I) LETTER OF INTENT IN RELATION TO A POSSIBLE ACQUISITION; AND (II) DELAY IN THE EXPECTED TIMELINE FOR UTILIZING THE NET PROCEEDS FROM GLOBAL OFFERING","u":"https://persistencegold.com/wp-content/uploads/2024/04/Pff506545910548d19c6239a4ee57191b.pdf"},{"d":"2024·03","t":"END OF STABILISATION PERIOD, NO STABILISING ACTION AND LAPSE OF THE OVER-ALLOTMENT OPTION","u":"https://persistencegold.com/wp-content/uploads/2024/03/P4336282d1f3843aba9dfbf6454cedf82.pdf"},{"d":"2024·03","t":"ANNOUNCEMENT OF FINAL OFFER PRICE AND ALLOTMENT RESULTS","u":"https://persistencegold.com/wp-content/uploads/2024/03/Peecaaa429e3b4bdd85a3935db415d9d3.pdf"},{"d":"2024·03","t":"Formal Notice-20231214","u":"https://persistencegold.com/wp-content/uploads/2024/03/P2804dcaad0274d08be1aba22374a84ce.pdf"}],"zh":[{"d":"2026·07","t":"自愿性公告—计划进行市场内股份购回","u":"https://persistencegold.com/wp-content/uploads/2026/07/自願性公告收購目標公司股份.pdf"},{"d":"2026·07","t":"自愿性公告 收购目标公司股份","u":"https://persistencegold.com/wp-content/uploads/2026/07/自願性公告收購目標公司股份.pdf"},{"d":"2026·06","t":"董事名单及其角色和职能 20260626","u":"https://persistencegold.com/wp-content/uploads/2026/06/董事名單及其角色和職能-20260626.pdf"},{"d":"2026·06","t":"于2026年6月26日举行之股东周年大会投票表决结果","u":"https://persistencegold.com/wp-content/uploads/2026/06/於2026年6月26日舉行之股東週年大會投票表決結果.pdf"},{"d":"2026·05","t":"建议授出发行及购回股份之一般授权；建议重选董事；及股东週年大会通告 20260526","u":"https://persistencegold.com/wp-content/uploads/2026/05/建議授出發行及購回股份之一般授權；建議重選董事；及股東週年大會通告-20260526.pdf"},{"d":"2026·05","t":"股东周年大会通告 20260526","u":"https://persistencegold.com/wp-content/uploads/2026/05/股東週年大會通告-20260526.pdf"},{"d":"2026·05","t":"董事会会议通告 20260508","u":"https://persistencegold.com/wp-content/uploads/2026/05/董事會會議通告20260508.pdf"},{"d":"2026·04","t":"董事名单及其角色和职能 20260408","u":"https://persistencegold.com/wp-content/uploads/2026/04/董事名單及其角色和職能-20260408.pdf"},{"d":"2026·04","t":"调任董事；审核委员会、薪酬委员会及提名委员会组成变动","u":"https://persistencegold.com/wp-content/uploads/2026/04/調任董事；審核委員會、薪酬委員會及提名委員會組成變動.pdf"},{"d":"2026·03","t":"年度业绩公告-截至2025年12月31日止年度","u":"https://persistencegold.com/wp-content/uploads/2026/03/年度業績公告—截至2025年12月31日止年度.pdf"},{"d":"2026·03","t":"内幕消息-烟台牟金恢复生产","u":"https://persistencegold.com/wp-content/uploads/2026/03/內幕消息-煙台牟金恢復生產.pdf"},{"d":"2026·03","t":"内幕消息-烟台中嘉地下矿场恢复生产","u":"https://persistencegold.com/wp-content/uploads/2026/03/內幕消息煙台中嘉地下礦場恢復生產.pdf"},{"d":"2026·03","t":"内幕消息-烟台中嘉露天矿恢复生产","u":"https://persistencegold.com/wp-content/uploads/2026/03/煙台中嘉露天礦場恢復生產.pdf"},{"d":"2026·03","t":"董事会会议通告 20260331","u":"https://persistencegold.com/wp-content/uploads/2026/03/董事会会议通告-20260331.pdf"},{"d":"2026·02","t":"内幕消息-(I)烟台中嘉及烟台牟金暂停生产; 及(II)配售事项所得款项净额用途的进展","u":"https://persistencegold.com/wp-content/uploads/2026/02/內幕消息I煙台中嘉及煙台牟金暫停生產；及II配售事項所得款項淨額用途的進展.pdf"},{"d":"2026·01","t":"董事名单及其角色和职能","u":"https://persistencegold.com/wp-content/uploads/2026/01/董事名單及其角色和職能20260112.pdf"},{"d":"2026·01","t":"委任执行董事","u":"https://persistencegold.com/wp-content/uploads/2026/01/委任執行董事-陈祝平20260112.pdf"},{"d":"2026·01","t":"更改公司名称、股份简称及公司网站","u":"https://persistencegold.com/wp-content/uploads/2026/01/更改公司名稱、股份簡稱及公司網站.pdf"},{"d":"2025·12","t":"于2025年12月12日举行之股东特别大会投票表决结果","u":"https://persistencegold.com/wp-content/uploads/2025/12/於2025年12月12日舉行之股東特別大會投票表決結果.pdf"},{"d":"2025·11","t":"建议更改公司名称及股东特别大会通告","u":"https://persistencegold.com/wp-content/uploads/2025/11/建議更改公司名稱及股東特別大會通告20251124.pdf"},{"d":"2025·11","t":"股东特别大会通告","u":"https://persistencegold.com/wp-content/uploads/2025/11/股東特別大會通告-20251124.pdf"},{"d":"2025·11","t":"内幕消息-宋家沟地下矿恢复生产","u":"https://persistencegold.com/wp-content/uploads/2025/11/內幕消息——宋家溝地下礦恢復生產.pdf"},{"d":"2025·11","t":"建议更改公司名称","u":"https://persistencegold.com/wp-content/uploads/2025/11/建議更改公司名稱.pdf"},{"d":"2025·11","t":"董事名单及其角色和职能 20251104","u":"https://persistencegold.com/wp-content/uploads/2025/11/董事名單及其角色和職能-20251104.pdf"},{"d":"2025·11","t":"公司秘书及授权代表变更","u":"https://persistencegold.com/wp-content/uploads/2025/11/公司秘書及授權代表變更.pdf"},{"d":"2025·11","t":"董事会会议通告 20251128","u":"https://persistencegold.com/wp-content/uploads/2025/11/董事會會議通告-20251128.pdf"},{"d":"2025·10","t":"翌日披露报表 (股份发行人 ── 已发行股份或库存股份变动、股份购回及/或在场内出售库存股份)","u":"https://persistencegold.com/wp-content/uploads/2025/10/翌日披露報表20251015.pdf"},{"d":"2025·10","t":"完成根据一般授权配售新股份","u":"https://persistencegold.com/wp-content/uploads/2025/10/完成根據一般授權配售新股份.pdf"},{"d":"2025·10","t":"补充公告 根据一般授权配售新股份","u":"https://persistencegold.com/wp-content/uploads/2025/10/补充公告-根据一般授权配售新股.pdf"},{"d":"2025·09","t":"内幕消息-邓格庄矿恢复生产","u":"https://persistencegold.com/wp-content/uploads/2025/09/鄧格莊礦恢復生產.pdf"},{"d":"2025·09","t":"根据一般授权配售新股份","u":"https://persistencegold.com/wp-content/uploads/2025/09/根據一般授權配售新股份.pdf"},{"d":"2025·09","t":"内幕消息-宋家沟地下矿山暂停生产","u":"https://persistencegold.com/wp-content/uploads/2025/09/宋家沟地下矿山暂停生产.pdf"},{"d":"2025·08","t":"股票发行人现金股息公告20250829","u":"https://persistencegold.com/wp-content/uploads/2025/08/股票发行人现金股息公告-20250829.pdf"},{"d":"2025·08","t":"董事会会议通告 20250813","u":"https://persistencegold.com/wp-content/uploads/2025/08/董事會會議通告20250813.pdf"},{"d":"2025·08","t":"执行董事、公司秘书及授权代表辞任","u":"https://persistencegold.com/wp-content/uploads/2025/08/執-行-董-事、公-司-秘-書-及-授-權-代-表-辭-任.pdf"},{"d":"2025·07","t":"内幕消息-邓格庄矿暂停生产","u":"https://persistencegold.com/wp-content/uploads/2025/07/邓格庄停产20250728.pdf"},{"d":"2025·07","t":"根据购股权计划授出购股权","u":"https://persistencegold.com/wp-content/uploads/2025/07/根據購股權計劃授出購股權.pdf"},{"d":"2025·06","t":"于2025年6月26日举行之股东周年大会投票表决结果","u":"https://persistencegold.com/wp-content/uploads/2025/06/於2025年6月26日舉行之股東週年大會投票表決結果.pdf"},{"d":"2025·05","t":"股东周年大会通告 20250528","u":"https://persistencegold.com/wp-content/uploads/2025/05/股東週年大會通告-20250528.pdf"},{"d":"2025·05","t":"建议授出发行及购回股份之一般授权；建议委任非执行董事；建议重选董事；及股东週年大会通告 20250528","u":"https://persistencegold.com/wp-content/uploads/2025/05/建議授出發行及購回股份之一般授權；建議重選董事；及股東週年大會通告.pdf"},{"d":"2025·05","t":"董事会会议通告 20250520","u":"https://persistencegold.com/wp-content/uploads/2025/05/董事会会议通告20250520.pdf"},{"d":"2025·03","t":"年度业绩公告-截至2024年12月31日止年度","u":"https://persistencegold.com/wp-content/uploads/2025/03/年度業績公告截至2024年12月31日止年度.pdf"},{"d":"2025·03","t":"盈利预告 20250324","u":"https://persistencegold.com/wp-content/uploads/2025/03/盈利預告-20250324.pdf"},{"d":"2025·03","t":"董事会会议通告 20250310","u":"https://persistencegold.com/wp-content/uploads/2025/03/董事会会议通告20250310.pdf"},{"d":"2025·02","t":"须予披露交易完成收购目标公司之股份","u":"https://persistencegold.com/wp-content/uploads/2025/02/須予披露交易完成收購目標公司之股份.pdf"},{"d":"2025·02","t":"董事名单及其角色和职能 20250206","u":"https://persistencegold.com/wp-content/uploads/2025/02/董事名單及其角色和職能20250206.pdf"},{"d":"2025·02","t":"风险管理委员会-职权范围","u":"https://persistencegold.com/wp-content/uploads/2025/02/風-險-管-理-委-員-會－職-權-範-圍.pdf"},{"d":"2025·02","t":"环境、社会及管治（ESG）委员会—职权范围","u":"https://persistencegold.com/wp-content/uploads/2025/02/環-境、社-會-及-管-治ESG委-員-會－職-權-範-圍.pdf"},{"d":"2025·02","t":"成立（I）环境、社会及管治（ESG）委员会；及（II）风险管理委员会","u":"https://persistencegold.com/wp-content/uploads/2025/02/成立I環-境、社會及管治ESG委員會；及II風險管理委員會.pdf"},{"d":"2025·02","t":"董事名单及其角色和职能","u":"https://persistencegold.com/wp-content/uploads/2025/02/董事名单20250204.pdf"},{"d":"2025·02","t":"执行董事辞任","u":"https://persistencegold.com/wp-content/uploads/2025/02/陈绍惠执董辞任.pdf"},{"d":"2025·01","t":"关于须予披露交易进展的公告","u":"https://persistencegold.com/wp-content/uploads/2025/01/關於須予披露交易進展的公告20250113.pdf"},{"d":"2024·12","t":"有关收购目标公司股份之须予披露交易之补充公告","u":"https://persistencegold.com/wp-content/uploads/2024/12/有關收購目標公司股份之須予披露交易之補充公告.pdf"},{"d":"2024·11","t":"须予披露交易收购目标公司之股份","u":"https://persistencegold.com/wp-content/uploads/2024/11/须予披露的交易.pdf"},{"d":"2024·11","t":"董事会会议通告 20241111","u":"https://persistencegold.com/wp-content/uploads/2024/11/董事會會議通告241111.pdf"},{"d":"2024·08","t":"股票发行人现金股息公告20240830","u":"https://persistencegold.com/wp-content/uploads/2024/08/股票發行人現金股息公告240830.pdf"},{"d":"2024·08","t":"盈利预告","u":"https://persistencegold.com/wp-content/uploads/2024/08/盈利预告23082024.pdf"},{"d":"2024·08","t":"变更全球发售所得款项净额的用途","u":"https://persistencegold.com/wp-content/uploads/2024/08/UOP用途变更.pdf"},{"d":"2024·08","t":"董事会会议通告","u":"https://persistencegold.com/wp-content/uploads/2024/08/董事會會議通告.pdf"},{"d":"2024·06","t":"(I)于2024年6月26日举行之股东周年大会投票表决结果；及(II)董事会成员变更","u":"https://persistencegold.com/wp-content/uploads/2024/06/I於2024年6月26日舉行之股東週年大會投票表決结果；及II董事會成員變更.pdf"},{"d":"2024·06","t":"董事名单及其角色和职能","u":"https://persistencegold.com/wp-content/uploads/2024/06/董事名單及其角色和職能.pdf"},{"d":"2024·05","t":"建议授出发行及购回股份之一般授权；建议委任非执行董事；建议重选董事；及股东週年大会通告","u":"https://persistencegold.com/wp-content/uploads/2024/05/建議授出發行及購回股份之一般授權；建議委任非執行董事；建議重選董事；及股東週年大會通告.pdf"},{"d":"2024·05","t":"股东周年大会通告","u":"https://persistencegold.com/wp-content/uploads/2024/05/股東週年大會通告.pdf"},{"d":"2024·05","t":"建议委任非执行董事","u":"https://persistencegold.com/wp-content/uploads/2024/05/建議委任非執行董事.pdf"},{"d":"2024·05","t":"股东周年大会适用之代表委任表格","u":"https://persistencegold.com/wp-content/uploads/2024/05/股東週年大會適用之代表委任表格.pdf"},{"d":"2024·04","t":"年度业绩公告-截至2023年12月31日止年度","u":"https://persistencegold.com/wp-content/uploads/2024/04/P1c259ecf16b94bf0a98b77ba597f81c5.pdf"},{"d":"2024·03","t":"稳定价格期结束、无稳定价格行动及超额配股权失效公告","u":"https://persistencegold.com/wp-content/uploads/2024/03/P4336282d1f3843aba9dfbf6454cedf82.pdf"},{"d":"2024·03","t":"最终发售价及配发公告","u":"https://persistencegold.com/wp-content/uploads/2024/03/Peecaaa429e3b4bdd85a3935db415d9d3.pdf"},{"d":"2024·03","t":"公告","u":"https://persistencegold.com/wp-content/uploads/2024/03/P2804dcaad0274d08be1aba22374a84ce.pdf"}],"hk":[{"d":"2026·07","t":"自願性公告—計劃進行市場內股份購回","u":"https://persistencegold.com/wp-content/uploads/2026/07/自願性公告收購目標公司股份.pdf"},{"d":"2026·07","t":"自願性公告 收購目標公司股份","u":"https://persistencegold.com/wp-content/uploads/2026/07/自願性公告收購目標公司股份.pdf"},{"d":"2026·06","t":"董事名單及其角色和職能 20260626","u":"https://persistencegold.com/wp-content/uploads/2026/06/董事名單及其角色和職能-20260626.pdf"},{"d":"2026·06","t":"於2026年6月26日舉行之股東週年大會投票表決结果","u":"https://persistencegold.com/wp-content/uploads/2026/06/於2026年6月26日舉行之股東週年大會投票表決結果.pdf"},{"d":"2026·05","t":"建議授出發行及購回股份之一般授權；建議重選董事；及股東週年大會通告 20260526","u":"https://persistencegold.com/wp-content/uploads/2026/05/建議授出發行及購回股份之一般授權；建議重選董事；及股東週年大會通告-20260526.pdf"},{"d":"2026·05","t":"股東週年大會通告 20260526","u":"https://persistencegold.com/wp-content/uploads/2026/05/股東週年大會通告-20260526.pdf"},{"d":"2026·05","t":"董事會會議通告 20260508","u":"https://persistencegold.com/wp-content/uploads/2026/05/董事會會議通告20260508.pdf"},{"d":"2026·04","t":"董事名單及其角色和職能 20260408","u":"https://persistencegold.com/wp-content/uploads/2026/04/董事名單及其角色和職能-20260408.pdf"},{"d":"2026·04","t":"調任董事；審核委員會、薪酬委員會及提名委員會組成變動","u":"https://persistencegold.com/wp-content/uploads/2026/04/調任董事；審核委員會、薪酬委員會及提名委員會組成變動.pdf"},{"d":"2026·03","t":"年度業績公告-截至2025年12月31日止年度","u":"https://persistencegold.com/wp-content/uploads/2026/03/年度業績公告—截至2025年12月31日止年度.pdf"},{"d":"2026·03","t":"內幕消息-煙台牟金恢復生產","u":"https://persistencegold.com/wp-content/uploads/2026/03/內幕消息-煙台牟金恢復生產.pdf"},{"d":"2026·03","t":"內幕消息-煙台中嘉地下礦場恢復生產","u":"https://persistencegold.com/wp-content/uploads/2026/03/內幕消息煙台中嘉地下礦場恢復生產.pdf"},{"d":"2026·03","t":"內幕消息－煙台中嘉露天礦場恢復生產","u":"https://persistencegold.com/wp-content/uploads/2026/03/煙台中嘉露天礦場恢復生產.pdf"},{"d":"2026·03","t":"董事會會議通告 20260331","u":"https://persistencegold.com/wp-content/uploads/2026/03/董事会会议通告-20260331.pdf"},{"d":"2026·02","t":"內幕消息 - (I)煙台中嘉及煙台牟金暫停生產；及(II)配售事項所得款項淨額用途的進展","u":"https://persistencegold.com/wp-content/uploads/2026/02/內幕消息I煙台中嘉及煙台牟金暫停生產；及II配售事項所得款項淨額用途的進展.pdf"},{"d":"2026·01","t":"董事名單及其角色和職能","u":"https://persistencegold.com/wp-content/uploads/2026/01/董事名單及其角色和職能20260112.pdf"},{"d":"2026·01","t":"委任執行董事","u":"https://persistencegold.com/wp-content/uploads/2026/01/委任執行董事-陈祝平20260112.pdf"},{"d":"2026·01","t":"更改公司名稱、股份簡稱及公司網站","u":"https://persistencegold.com/wp-content/uploads/2026/01/更改公司名稱、股份簡稱及公司網站.pdf"},{"d":"2025·12","t":"於2025年12月12日舉行之股東特別大會投票表決結果","u":"https://persistencegold.com/wp-content/uploads/2025/12/於2025年12月12日舉行之股東特別大會投票表決結果.pdf"},{"d":"2025·11","t":"建議更改公司名稱及股東特別大會通告","u":"https://persistencegold.com/wp-content/uploads/2025/11/建議更改公司名稱及股東特別大會通告20251124.pdf"},{"d":"2025·11","t":"股東特別大會通告","u":"https://persistencegold.com/wp-content/uploads/2025/11/股東特別大會通告-20251124.pdf"},{"d":"2025·11","t":"內幕消息－宋家溝地下礦恢復生產","u":"https://persistencegold.com/wp-content/uploads/2025/11/內幕消息——宋家溝地下礦恢復生產.pdf"},{"d":"2025·11","t":"建議更改公司名稱","u":"https://persistencegold.com/wp-content/uploads/2025/11/建議更改公司名稱.pdf"},{"d":"2025·11","t":"董事名單及其角色和職能 20251104","u":"https://persistencegold.com/wp-content/uploads/2025/11/董事名單及其角色和職能-20251104.pdf"},{"d":"2025·11","t":"公司秘書及授權代表變更","u":"https://persistencegold.com/wp-content/uploads/2025/11/公司秘書及授權代表變更.pdf"},{"d":"2025·11","t":"董事會會議通告 20251128","u":"https://persistencegold.com/wp-content/uploads/2025/11/董事會會議通告-20251128.pdf"},{"d":"2025·10","t":"翌日披露報表 (股份發行人 ── 已發行股份或庫存股份變動、股份購回及/或在場内出售庫存股份)","u":"https://persistencegold.com/wp-content/uploads/2025/10/翌日披露報表20251015.pdf"},{"d":"2025·10","t":"完成根據一般授權配售新股份","u":"https://persistencegold.com/wp-content/uploads/2025/10/完成根據一般授權配售新股份.pdf"},{"d":"2025·10","t":"補充公告 根據一般授權配售新股份","u":"https://persistencegold.com/wp-content/uploads/2025/10/补充公告-根据一般授权配售新股.pdf"},{"d":"2025·09","t":"內幕消息－鄧格莊礦恢復生產","u":"https://persistencegold.com/wp-content/uploads/2025/09/鄧格莊礦恢復生產.pdf"},{"d":"2025·09","t":"根據一般授權配售新股份","u":"https://persistencegold.com/wp-content/uploads/2025/09/根據一般授權配售新股份.pdf"},{"d":"2025·09","t":"內幕消息－宋家溝地下礦山暫停生產","u":"https://persistencegold.com/wp-content/uploads/2025/09/宋家沟地下矿山暂停生产.pdf"},{"d":"2025·08","t":"股票發行人現金股息公告 20250829","u":"https://persistencegold.com/wp-content/uploads/2025/08/股票发行人现金股息公告-20250829.pdf"},{"d":"2025·08","t":"董事會會議通告 20250813","u":"https://persistencegold.com/wp-content/uploads/2025/08/董事會會議通告20250813.pdf"},{"d":"2025·08","t":"執行董事、公司秘書及授權代表辭任","u":"https://persistencegold.com/wp-content/uploads/2025/08/執-行-董-事、公-司-秘-書-及-授-權-代-表-辭-任.pdf"},{"d":"2025·07","t":"內幕消息－鄧格莊礦暫停生產","u":"https://persistencegold.com/wp-content/uploads/2025/07/邓格庄停产20250728.pdf"},{"d":"2025·07","t":"根據購股權計劃授出購股權","u":"https://persistencegold.com/wp-content/uploads/2025/07/根據購股權計劃授出購股權.pdf"},{"d":"2025·06","t":"於2025年6月26日舉行之股東週年大會投票表決结果","u":"https://persistencegold.com/wp-content/uploads/2025/06/於2025年6月26日舉行之股東週年大會投票表決結果.pdf"},{"d":"2025·05","t":"股東週年大會通告 20250528","u":"https://persistencegold.com/wp-content/uploads/2025/05/股東週年大會通告-20250528.pdf"},{"d":"2025·05","t":"建議授出發行及購回股份之一般授權；建議委任非執行董事；建議重選董事；及股東週年大會通告 20250528","u":"https://persistencegold.com/wp-content/uploads/2025/05/建議授出發行及購回股份之一般授權；建議重選董事；及股東週年大會通告.pdf"},{"d":"2025·05","t":"董事會會議通告 20250520","u":"https://persistencegold.com/wp-content/uploads/2025/05/董事会会议通告20250520.pdf"},{"d":"2025·03","t":"年度業績公告-截至2024年12月31日止年度","u":"https://persistencegold.com/wp-content/uploads/2025/03/年度業績公告截至2024年12月31日止年度.pdf"},{"d":"2025·03","t":"盈利預告 20250324","u":"https://persistencegold.com/wp-content/uploads/2025/03/盈利預告-20250324.pdf"},{"d":"2025·03","t":"董事會會議通告 20250310","u":"https://persistencegold.com/wp-content/uploads/2025/03/董事会会议通告20250310.pdf"},{"d":"2025·02","t":"須予披露交易完成收購目標公司之股份","u":"https://persistencegold.com/wp-content/uploads/2025/02/須予披露交易完成收購目標公司之股份.pdf"},{"d":"2025·02","t":"董事名單及其角色和職能 20250206","u":"https://persistencegold.com/wp-content/uploads/2025/02/董事名單及其角色和職能20250206.pdf"},{"d":"2025·02","t":"風險管理委員會—職權範圍","u":"https://persistencegold.com/wp-content/uploads/2025/02/風-險-管-理-委-員-會－職-權-範-圍.pdf"},{"d":"2025·02","t":"環境、社會及管治(ESG)委員會—職權範圍","u":"https://persistencegold.com/wp-content/uploads/2025/02/環-境、社-會-及-管-治ESG委-員-會－職-權-範-圍.pdf"},{"d":"2025·02","t":"成 立(I)環境、社會及管治(ESG)委員會；及(II)風險管理委員會","u":"https://persistencegold.com/wp-content/uploads/2025/02/成立I環-境、社會及管治ESG委員會；及II風險管理委員會.pdf"},{"d":"2025·02","t":"董事名單及其角色和職能","u":"https://persistencegold.com/wp-content/uploads/2025/02/董事名单20250204.pdf"},{"d":"2025·02","t":"執行董事辭任","u":"https://persistencegold.com/wp-content/uploads/2025/02/陈绍惠执董辞任.pdf"},{"d":"2025·01","t":"關於須予披露交易進展的公告","u":"https://persistencegold.com/wp-content/uploads/2025/01/關於須予披露交易進展的公告20250113.pdf"},{"d":"2024·12","t":"有關收購目標公司股份之須予披露交易之補充公告","u":"https://persistencegold.com/wp-content/uploads/2024/12/有關收購目標公司股份之須予披露交易之補充公告.pdf"},{"d":"2024·11","t":"須予披露交易收購目標公司之股份","u":"https://persistencegold.com/wp-content/uploads/2024/11/须予披露的交易.pdf"},{"d":"2024·11","t":"董事會會議通告 20241111","u":"https://persistencegold.com/wp-content/uploads/2024/11/董事會會議通告241111.pdf"},{"d":"2024·08","t":"股票發行人現金股息公告20240830","u":"https://persistencegold.com/wp-content/uploads/2024/08/股票發行人現金股息公告240830.pdf"},{"d":"2024·08","t":"盈利預告","u":"https://persistencegold.com/wp-content/uploads/2024/08/盈利预告23082024.pdf"},{"d":"2024·08","t":"變更全球發售所得款項淨額的用途","u":"https://persistencegold.com/wp-content/uploads/2024/08/UOP用途变更.pdf"},{"d":"2024·08","t":"董事會會議通告","u":"https://persistencegold.com/wp-content/uploads/2024/08/董事會會議通告.pdf"},{"d":"2024·06","t":"(I)於2024年6月26日舉行之股東週年大會投票表決结果；及(II)董事會成員變更","u":"https://persistencegold.com/wp-content/uploads/2024/06/I於2024年6月26日舉行之股東週年大會投票表決结果；及II董事會成員變更.pdf"},{"d":"2024·06","t":"董事名單及其角色和職能","u":"https://persistencegold.com/wp-content/uploads/2024/06/董事名單及其角色和職能.pdf"},{"d":"2024·05","t":"建議授出發行及購回股份之一般授權；建議委任非執行董事；建議重選董事；及股東週年大會通告","u":"https://persistencegold.com/wp-content/uploads/2024/05/建議授出發行及購回股份之一般授權；建議委任非執行董事；建議重選董事；及股東週年大會通告.pdf"},{"d":"2024·05","t":"股東週年大會通告","u":"https://persistencegold.com/wp-content/uploads/2024/05/股東週年大會通告.pdf"},{"d":"2024·05","t":"建議委任非執行董事","u":"https://persistencegold.com/wp-content/uploads/2024/05/建議委任非執行董事.pdf"},{"d":"2024·05","t":"股東週年大會適用之代表委任表格","u":"https://persistencegold.com/wp-content/uploads/2024/05/股東週年大會適用之代表委任表格.pdf"},{"d":"2024·04","t":"年度業績公告-截至2023年12月31日止年度","u":"https://persistencegold.com/wp-content/uploads/2024/04/P1c259ecf16b94bf0a98b77ba597f81c5.pdf"},{"d":"2024·03","t":"穩定價格期結束、無穩定價格行動及超額配股權失效公告","u":"https://persistencegold.com/wp-content/uploads/2024/03/P4336282d1f3843aba9dfbf6454cedf82.pdf"},{"d":"2024·03","t":"最終發售價及配發公告","u":"https://persistencegold.com/wp-content/uploads/2024/03/Peecaaa429e3b4bdd85a3935db415d9d3.pdf"},{"d":"2024·03","t":"公告","u":"https://persistencegold.com/wp-content/uploads/2024/03/P2804dcaad0274d08be1aba22374a84ce.pdf"}]};
   var annYear = "all";
   function annEsc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;"); }
   function annTag(t) {
+    if (lang === "hk") {
+      if (/業績|盈利/.test(t)) return "業績";
+      if (/投票結果|週年大會|周年大會|特別大會|大會通告|代表委任/.test(t)) return "股東大會";
+      if (/內幕消息/.test(t)) return "內幕消息";
+      if (/董事會會議/.test(t)) return "董事會";
+      if (/董事名單|董事|公司秘書/.test(t)) return "董事及高管";
+      if (/股息/.test(t)) return "股息";
+      if (/配售/.test(t)) return "配售";
+      if (/購股權/.test(t)) return "購股權";
+      if (/購回/.test(t)) return "回購";
+      if (/委員會/.test(t)) return "治理";
+      if (/收購|交易/.test(t)) return "併購";
+      return "公告";
+    }
     if (lang === "zh") {
       if (/业绩|盈利/.test(t)) return "业绩";
       if (/投票结果|周年大会|特别大会|大会通告|代表委任/.test(t)) return "股东大会";
@@ -1114,12 +1609,12 @@
     if (/ACQUISITION|TRANSACTION/.test(s)) return "M&amp;A";
     return "Announcement";
   }
-  function annData() { return PG_ANNS ? PG_ANNS[lang === "zh" ? "zh" : "en"] : []; }
+  function annData() { return PG_ANNS ? (PG_ANNS[lang] || PG_ANNS.en) : []; }
   function renderAnnTabs() {
     if (!PG_ANNS) return;
     const years = [...new Set(annData().map((a) => a.d.slice(0, 4)))].sort().reverse();
     const tabs = document.getElementById("annTabs");
-    const allLbl = lang === "zh" ? "全部" : "All";
+    const allLbl = lang === "en" ? "All" : "全部";
     tabs.innerHTML = ['<button data-y="all">' + allLbl + "</button>"]
       .concat(years.map((y) => '<button data-y="' + y + '">' + y + "</button>")).join("") +
       '<span class="ann-count" id="annCount"></span>';
@@ -1135,7 +1630,7 @@
       '<a class="ann" href="' + a.u + '" target="_blank" rel="noopener"><span class="d">' + a.d +
       '</span><span class="t">' + annEsc(a.t) + '</span><span class="c">' + annTag(a.t) + "</span></a>").join("");
     const c = document.getElementById("annCount");
-    if (c) c.textContent = rows.length + (lang === "zh" ? " 条" : " filings");
+    if (c) c.textContent = rows.length + (lang === "en" ? " filings" : lang === "hk" ? " 條" : " 条");
   }
   renderAnnTabs(); renderAnns();
 
@@ -1349,15 +1844,15 @@
       return { X, Y };
     }
 
-    function attach() {
+    function updateLabels() {
       const closes = rows.map((r) => r[1]);
       const lo = Math.min(...closes), hi = Math.max(...closes);
       const last = rows[rows.length - 1];
       document.getElementById("spark-last").textContent = "HK$" + last[1].toFixed(3);
       document.getElementById("spark-lo").textContent = "L HK$" + lo.toFixed(3);
       document.getElementById("spark-hi").textContent = "H HK$" + hi.toFixed(3);
-      card.hidden = false;
-      render();
+    }
+    function attachEvents() {
       canvas.addEventListener("mousemove", (ev) => {
         const rect = canvas.getBoundingClientRect();
         const i = Math.max(0, Math.min(rows.length - 1,
@@ -1378,19 +1873,30 @@
       window.addEventListener("resize", render);
     }
 
-    const s = document.createElement("script");
-    s.src = "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?_var=kline_dayqfq&param=hk02489,day,,,250,qfq&_=" + Date.now();
-    s.onload = () => {
-      try {
-        const d = window.kline_dayqfq.data.hk02489;
-        const day = d.day || d.qfqday;
-        rows = day.map((r) => [r[0], parseFloat(r[2])]).filter((r) => r[1] > 0);
-        if (rows.length > 10) attach();
-      } catch (e) { /* leave card hidden */ }
-      s.remove();
-    };
-    s.onerror = () => s.remove(); /* offline or blocked: card stays hidden */
-    document.body.appendChild(s);
+    let bound = false;
+    function loadSpark() {
+      const s = document.createElement("script");
+      s.src = "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?_var=kline_dayqfq&param=hk02489,day,,,250,qfq&_=" + Date.now();
+      s.onload = () => {
+        try {
+          const d = window.kline_dayqfq.data.hk02489;
+          const day = d.day || d.qfqday;
+          const parsed = day.map((r) => [r[0], parseFloat(r[2])]).filter((r) => r[1] > 0);
+          if (parsed.length > 10) {
+            rows = parsed;
+            updateLabels();
+            card.hidden = false;
+            if (!bound) { bound = true; attachEvents(); }
+            render();
+          }
+        } catch (e) { /* keep previous data; card stays hidden if never loaded */ }
+        s.remove();
+      };
+      s.onerror = () => s.remove(); /* offline or blocked: card stays hidden */
+      document.body.appendChild(s);
+    }
+    loadSpark();
+    setInterval(loadSpark, 60000); /* keep endpoint in sync with the ticker */
   })();
 </script>
 </body>
